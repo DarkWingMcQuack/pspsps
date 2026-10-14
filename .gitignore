@@ -1,0 +1,14 @@
+.bsp/
+.bloop/
+.metals/
+.idea/
+.scala-build/
+**/target/
+**/.jvm/
+**/.js/
+project/project/
+*.class
+.DS_Store
+.direnv/
+result
+result-*
