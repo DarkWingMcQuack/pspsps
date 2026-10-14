@@ -1,0 +1,691 @@
+{
+  "schema_version": 1,
+  "declaration_count": 76,
+  "distinct_name_count": 72,
+  "extensions": [
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asEitherTCond",
+      "receiver": "extension [F[_]](condition: F[Boolean])",
+      "signature": "def asEitherTCond(using FlatMap[F]): EitherCondition[F]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 24
+    },
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asEitherTCondF",
+      "receiver": "extension [F[_]](condition: F[Boolean])",
+      "signature": "def asEitherTCondF(using FlatMap[F]): EitherCondition[F]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 27
+    },
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asEitherTCond",
+      "receiver": "extension (condition: Boolean)",
+      "signature": "def asEitherTCond[F[_]]: EitherCondition[F]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 31
+    },
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asEitherTCondPure",
+      "receiver": "extension (condition: Boolean)",
+      "signature": "def asEitherTCondPure[F[_]]: EitherCondition[F]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 34
+    },
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asOptionTCond",
+      "receiver": "extension [F[_]](condition: F[Boolean])",
+      "signature": "def asOptionTCond(using FlatMap[F]): OptionCondition[F]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 39
+    },
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asOptionTCondF",
+      "receiver": "extension [F[_]](condition: F[Boolean])",
+      "signature": "def asOptionTCondF(using FlatMap[F]): OptionCondition[F]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 42
+    },
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asOptionTCond",
+      "receiver": "extension (condition: Boolean)",
+      "signature": "def asOptionTCond[F[_]]: OptionCondition[F]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 46
+    },
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asOptionTCondPure",
+      "receiver": "extension (condition: Boolean)",
+      "signature": "def asOptionTCondPure[F[_]]: OptionCondition[F]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 49
+    },
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asEitherCond",
+      "receiver": "extension (condition: Boolean)",
+      "signature": "def asEitherCond: PureEitherCondition",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 54
+    },
+    {
+      "module": "core",
+      "family": "Conditional",
+      "name": "asOptionCond",
+      "receiver": "extension (condition: Boolean)",
+      "signature": "def asOptionCond: PureOptionCondition",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/ConditionalSyntax.scala",
+      "line": 59
+    },
+    {
+      "module": "core",
+      "family": "EitherT",
+      "name": "asEitherT",
+      "receiver": "extension [F[_], E, A](value: F[Either[E, A]])",
+      "signature": "def asEitherT: EitherT[F, E, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/EitherTSyntax.scala",
+      "line": 26
+    },
+    {
+      "module": "core",
+      "family": "EitherT",
+      "name": "asEitherTWrap",
+      "receiver": "extension [F[_], E, A](value: F[Either[E, A]])",
+      "signature": "def asEitherTWrap: EitherT[F, E, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/EitherTSyntax.scala",
+      "line": 29
+    },
+    {
+      "module": "core",
+      "family": "EitherT",
+      "name": "asEitherT",
+      "receiver": "extension [E, A](value: Either[E, A])",
+      "signature": "def asEitherT[F[_]: Applicative]: EitherT[F, E, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/EitherTSyntax.scala",
+      "line": 33
+    },
+    {
+      "module": "core",
+      "family": "EitherT",
+      "name": "asEitherTLiftF",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asEitherTLiftF[E](using Functor[F]): EitherT[F, E, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/EitherTSyntax.scala",
+      "line": 38
+    },
+    {
+      "module": "core",
+      "family": "EitherT",
+      "name": "asEitherTLeftF",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asEitherTLeftF[B](using Functor[F]): EitherT[F, A, B]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/EitherTSyntax.scala",
+      "line": 42
+    },
+    {
+      "module": "core",
+      "family": "EitherT",
+      "name": "asEitherTPure",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asEitherTPure[F[_]: Applicative, E]: EitherT[F, E, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/EitherTSyntax.scala",
+      "line": 47
+    },
+    {
+      "module": "core",
+      "family": "EitherT",
+      "name": "asEitherTLeftT",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asEitherTLeftT[F[_]: Applicative, B]: EitherT[F, A, B]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/EitherTSyntax.scala",
+      "line": 51
+    },
+    {
+      "module": "core",
+      "family": "IorT",
+      "name": "asIorT",
+      "receiver": "extension [F[_], E, A](value: F[Ior[E, A]])",
+      "signature": "def asIorT: IorT[F, E, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/IorTSyntax.scala",
+      "line": 26
+    },
+    {
+      "module": "core",
+      "family": "IorT",
+      "name": "asIorTFromIor",
+      "receiver": "extension [E, A](value: Ior[E, A])",
+      "signature": "def asIorTFromIor[F[_]: Applicative]: IorT[F, E, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/IorTSyntax.scala",
+      "line": 30
+    },
+    {
+      "module": "core",
+      "family": "IorT",
+      "name": "asIorTLiftF",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asIorTLiftF[E](using Applicative[F]): IorT[F, E, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/IorTSyntax.scala",
+      "line": 35
+    },
+    {
+      "module": "core",
+      "family": "IorT",
+      "name": "asIorTPure",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asIorTPure[F[_]: Applicative, E]: IorT[F, E, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/IorTSyntax.scala",
+      "line": 40
+    },
+    {
+      "module": "core",
+      "family": "Kleisli",
+      "name": "asKleisli",
+      "receiver": "extension [F[_], R, A](run: R => F[A])",
+      "signature": "def asKleisli: Kleisli[F, R, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/KleisliSyntax.scala",
+      "line": 26
+    },
+    {
+      "module": "core",
+      "family": "Kleisli",
+      "name": "asReader",
+      "receiver": "extension [R, A](run: R => A)",
+      "signature": "def asReader: Reader[R, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/KleisliSyntax.scala",
+      "line": 30
+    },
+    {
+      "module": "core",
+      "family": "Kleisli",
+      "name": "asCokleisli",
+      "receiver": "extension [F[_], A, B](run: F[A] => B)",
+      "signature": "def asCokleisli: Cokleisli[F, A, B]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/KleisliSyntax.scala",
+      "line": 34
+    },
+    {
+      "module": "core",
+      "family": "Kleisli",
+      "name": "asKleisliLiftF",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asKleisliLiftF[R]: Kleisli[F, R, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/KleisliSyntax.scala",
+      "line": 38
+    },
+    {
+      "module": "core",
+      "family": "Kleisli",
+      "name": "asKleisliPure",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asKleisliPure[F[_]: Applicative, R]: Kleisli[F, R, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/KleisliSyntax.scala",
+      "line": 42
+    },
+    {
+      "module": "core",
+      "family": "Nullable",
+      "name": "nullable",
+      "receiver": "extension [A <: AnyRef](value: A)",
+      "signature": "def nullable: Option[A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/NullableSyntax.scala",
+      "line": 22
+    },
+    {
+      "module": "core",
+      "family": "OptionT",
+      "name": "asOptionT",
+      "receiver": "extension [F[_], A](value: F[Option[A]])",
+      "signature": "def asOptionT: OptionT[F, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/OptionTSyntax.scala",
+      "line": 26
+    },
+    {
+      "module": "core",
+      "family": "OptionT",
+      "name": "asOptionTWrap",
+      "receiver": "extension [F[_], A](value: F[Option[A]])",
+      "signature": "def asOptionTWrap: OptionT[F, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/OptionTSyntax.scala",
+      "line": 29
+    },
+    {
+      "module": "core",
+      "family": "OptionT",
+      "name": "asOptionT",
+      "receiver": "extension [A](value: Option[A])",
+      "signature": "def asOptionT[F[_]: Applicative]: OptionT[F, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/OptionTSyntax.scala",
+      "line": 33
+    },
+    {
+      "module": "core",
+      "family": "OptionT",
+      "name": "asOptionTLiftF",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asOptionTLiftF(using Functor[F]): OptionT[F, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/OptionTSyntax.scala",
+      "line": 38
+    },
+    {
+      "module": "core",
+      "family": "OptionT",
+      "name": "asOptionTPure",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asOptionTPure[F[_]: Applicative]: OptionT[F, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/OptionTSyntax.scala",
+      "line": 43
+    },
+    {
+      "module": "core",
+      "family": "StateT",
+      "name": "asStateT",
+      "receiver": "extension [F[_], S, A](run: S => F[(S, A)])",
+      "signature": "def asStateT(using Applicative[F]): StateT[F, S, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/StateTSyntax.scala",
+      "line": 26
+    },
+    {
+      "module": "core",
+      "family": "StateT",
+      "name": "asIndexedStateT",
+      "receiver": "extension [F[_], S1, S2, A](run: S1 => F[(S2, A)])",
+      "signature": "def asIndexedStateT(using Applicative[F]): IndexedStateT[F, S1, S2, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/StateTSyntax.scala",
+      "line": 30
+    },
+    {
+      "module": "core",
+      "family": "StateT",
+      "name": "asStateTApplyF",
+      "receiver": "extension [F[_], S, A](run: F[S => F[(S, A)]])",
+      "signature": "def asStateTApplyF: StateT[F, S, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/StateTSyntax.scala",
+      "line": 35
+    },
+    {
+      "module": "core",
+      "family": "StateT",
+      "name": "asState",
+      "receiver": "extension [S, A](run: S => (S, A))",
+      "signature": "def asState: State[S, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/StateTSyntax.scala",
+      "line": 39
+    },
+    {
+      "module": "core",
+      "family": "StateT",
+      "name": "asStateTLiftF",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asStateTLiftF[S](using Applicative[F]): StateT[F, S, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/StateTSyntax.scala",
+      "line": 43
+    },
+    {
+      "module": "core",
+      "family": "StateT",
+      "name": "asStateTPure",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asStateTPure[F[_]: Applicative, S]: StateT[F, S, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/StateTSyntax.scala",
+      "line": 48
+    },
+    {
+      "module": "core",
+      "family": "WriterT",
+      "name": "asWriterT",
+      "receiver": "extension [F[_], L, A](value: F[(L, A)])",
+      "signature": "def asWriterT: WriterT[F, L, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/WriterTSyntax.scala",
+      "line": 26
+    },
+    {
+      "module": "core",
+      "family": "WriterT",
+      "name": "asWriterTFromTuple",
+      "receiver": "extension [L, A](value: (L, A))",
+      "signature": "def asWriterTFromTuple[F[_]: Applicative]: WriterT[F, L, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/WriterTSyntax.scala",
+      "line": 30
+    },
+    {
+      "module": "core",
+      "family": "WriterT",
+      "name": "asWriter",
+      "receiver": "extension [L, A](value: (L, A))",
+      "signature": "def asWriter: Writer[L, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/WriterTSyntax.scala",
+      "line": 34
+    },
+    {
+      "module": "core",
+      "family": "WriterT",
+      "name": "asWriterTLiftF",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asWriterTLiftF[L: Monoid](using Applicative[F]): WriterT[F, L, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/WriterTSyntax.scala",
+      "line": 38
+    },
+    {
+      "module": "core",
+      "family": "WriterT",
+      "name": "asWriterTValue",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asWriterTValue[F[_]: Applicative, L: Monoid]: WriterT[F, L, A]",
+      "source": "modules/core/src/main/scala-3/pspsps/syntax/WriterTSyntax.scala",
+      "line": 43
+    },
+    {
+      "module": "effect",
+      "family": "Ref",
+      "name": "asRef",
+      "receiver": "extension [A](initial: A)",
+      "signature": "def asRef[F[_]: Ref.Make]: F[Ref[F, A]]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/RefSyntax.scala",
+      "line": 26
+    },
+    {
+      "module": "effect",
+      "family": "Ref",
+      "name": "asRefOfEffect",
+      "receiver": "extension [F[_], A](initial: F[A])",
+      "signature": "def asRefOfEffect(using Ref.Make[F], FlatMap[F]): F[Ref[F, A]]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/RefSyntax.scala",
+      "line": 30
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceEval",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asResourceEval: Resource[F, A]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 26
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceMake",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asResourceMake(release: A => F[Unit])(using Functor[F]): Resource[F, A]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 29
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceMakeCase",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asResourceMakeCase(release: (A, Resource.ExitCase) => F[Unit])(using Functor[F]): Resource[F, A]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 33
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceAutoCloseable",
+      "receiver": "extension [F[_], A <: AutoCloseable](acquire: F[A])",
+      "signature": "def asResourceAutoCloseable(using Sync[F]): Resource[F, A]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 39
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceOnFinalize",
+      "receiver": "extension [F[_]](release: F[Unit])",
+      "signature": "def asResourceOnFinalize(using Applicative[F]): Resource[F, Unit]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 44
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceOnFinalizeCase",
+      "receiver": "extension [F[_]](release: Resource.ExitCase => F[Unit])",
+      "signature": "def asResourceOnFinalizeCase(using Applicative[F]): Resource[F, Unit]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 49
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourcePure",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asResourcePure[F[_]]: Resource[F, A]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 54
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceWrap",
+      "receiver": "extension [F[_], A](value: F[(A, F[Unit])])",
+      "signature": "def asResourceWrap(using Functor[F]): Resource[F, A]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 59
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceWrapCase",
+      "receiver": "extension [F[_], A](value: F[(A, Resource.ExitCase => F[Unit])])",
+      "signature": "def asResourceWrapCase: Resource[F, A]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 63
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceMakeFull",
+      "receiver": "extension [F[_], A](acquire: Poll[F] => F[A])",
+      "signature": "def asResourceMakeFull(release: A => F[Unit])(using Functor[F]): Resource[F, A]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 70
+    },
+    {
+      "module": "effect",
+      "family": "Resource",
+      "name": "asResourceMakeCaseFull",
+      "receiver": "extension [F[_], A](acquire: Poll[F] => F[A])",
+      "signature": "def asResourceMakeCaseFull(release: (A, Resource.ExitCase) => F[Unit])(using Functor[F]): Resource[F, A]",
+      "source": "modules/effect/src/main/scala-3/pspsps/syntax/ResourceSyntax.scala",
+      "line": 75
+    },
+    {
+      "module": "fs2",
+      "family": "Chunk",
+      "name": "asChunk",
+      "receiver": "extension [A](values: scala.collection.Seq[A])",
+      "signature": "def asChunk: Chunk[A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/ChunkSyntax.scala",
+      "line": 25
+    },
+    {
+      "module": "fs2",
+      "family": "Chunk",
+      "name": "asChunkSingleton",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asChunkSingleton: Chunk[A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/ChunkSyntax.scala",
+      "line": 29
+    },
+    {
+      "module": "fs2",
+      "family": "Pull",
+      "name": "asPullEval",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asPullEval: Pull[F, Nothing, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/PullSyntax.scala",
+      "line": 25
+    },
+    {
+      "module": "fs2",
+      "family": "Pull",
+      "name": "asPullAttemptEval",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asPullAttemptEval: Pull[F, Nothing, Either[Throwable, A]]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/PullSyntax.scala",
+      "line": 28
+    },
+    {
+      "module": "fs2",
+      "family": "Pull",
+      "name": "asPullPure",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asPullPure[F[_]]: Pull[F, Nothing, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/PullSyntax.scala",
+      "line": 33
+    },
+    {
+      "module": "fs2",
+      "family": "Pull",
+      "name": "asPullOutput1",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asPullOutput1[F[_]]: Pull[F, A, Unit]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/PullSyntax.scala",
+      "line": 36
+    },
+    {
+      "module": "fs2",
+      "family": "Pull",
+      "name": "asPullOutput",
+      "receiver": "extension [A](values: Chunk[A])",
+      "signature": "def asPullOutput[F[_]]: Pull[F, A, Unit]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/PullSyntax.scala",
+      "line": 40
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamEval",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asStreamEval: Stream[F, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 28
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamAttemptEval",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asStreamAttemptEval: Stream[F, Either[Throwable, A]]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 31
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamRepeatEval",
+      "receiver": "extension [F[_], A](value: F[A])",
+      "signature": "def asStreamRepeatEval: Stream[F, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 35
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamExec",
+      "receiver": "extension [F[_]](value: F[Unit])",
+      "signature": "def asStreamExec: Stream[F, Nothing]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 39
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamEmit",
+      "receiver": "extension [A](value: A)",
+      "signature": "def asStreamEmit[F[_]]: Stream[F, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 43
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamEmits",
+      "receiver": "extension [A](values: scala.collection.Seq[A])",
+      "signature": "def asStreamEmits[F[_]]: Stream[F, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 47
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamChunk",
+      "receiver": "extension [A](values: Chunk[A])",
+      "signature": "def asStreamChunk[F[_]]: Stream[F, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 51
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamEvalUnChunk",
+      "receiver": "extension [F[_], A](value: F[Chunk[A]])",
+      "signature": "def asStreamEvalUnChunk: Stream[F, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 55
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamEvals",
+      "receiver": "extension [F[_], G[_], A](value: F[G[A]])",
+      "signature": "def asStreamEvals(using Foldable[G]): Stream[F, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 61
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamResource",
+      "receiver": "extension [F[_], A](value: Resource[F, A])",
+      "signature": "def asStreamResource(using MonadCancel[F, ?]): Stream[F, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 65
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamFromOption",
+      "receiver": "extension [A](value: Option[A])",
+      "signature": "def asStreamFromOption[F[_]]: Stream[F, A]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 70
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamSleep",
+      "receiver": "extension (duration: FiniteDuration)",
+      "signature": "def asStreamSleep[F[_]: Temporal]: Stream[F, Unit]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 74
+    },
+    {
+      "module": "fs2",
+      "family": "Stream",
+      "name": "asStreamAwakeEvery",
+      "receiver": "extension (duration: FiniteDuration)",
+      "signature": "def asStreamAwakeEvery[F[_]: Temporal]: Stream[F, FiniteDuration]",
+      "source": "modules/fs2/src/main/scala-3/pspsps/syntax/StreamSyntax.scala",
+      "line": 77
+    }
+  ]
+}
