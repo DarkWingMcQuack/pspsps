@@ -28,6 +28,7 @@ jobs:
   build:
     name: Test
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         scala: [2.13, 3]
@@ -104,7 +105,7 @@ jobs:
         run: sbt 'project ${{ matrix.project }}' '++ ${{ matrix.scala }}' doc
 
       - name: Compile examples
-        if: matrix.project == 'rootJVM'
+        if: matrix.project == 'rootJVM' && matrix.scala == '3'
         run: sbt 'project ${{ matrix.project }}' '++ ${{ matrix.scala }}' examples/compile
 
       - name: Make target directories

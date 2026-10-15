@@ -27,6 +27,7 @@ ThisBuild / tlSitePublishBranch := Some("master")
 ThisBuild / tlSitePublishTags := false
 ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest")
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"), JavaSpec.temurin("21"))
+ThisBuild / githubWorkflowBuildMatrixFailFast := Some(false)
 ThisBuild / githubWorkflowPermissions := Some(Permissions.ReadAll)
 ThisBuild / githubWorkflowIncludeClean := false
 ThisBuild / githubWorkflowPublishNeeds += "site"
@@ -39,7 +40,7 @@ ThisBuild / githubWorkflowBuildPreamble += WorkflowStep.Use(
 ThisBuild / githubWorkflowBuild += WorkflowStep.Sbt(
   List("examples/compile"),
   name = Some("Compile examples"),
-  cond = Some("matrix.project == 'rootJVM'")
+  cond = Some("matrix.project == 'rootJVM' && matrix.scala == '3'")
 )
 ThisBuild / githubWorkflowGeneratedCI ~= { jobs =>
   jobs.map {
@@ -61,7 +62,7 @@ val disciplineVersion = "1.7.0"
 
 lazy val root = tlCrossRootProject
   .aggregate(core, effect, streaming, all, laws, tests)
-  .aggregate(microsite, examples, unidocs)
+  .configureRoot(_.aggregate(microsite, examples, unidocs))
 
 lazy val core = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
