@@ -9,16 +9,16 @@ Scala 2.13 uses `_` in place of `*` for wildcard imports.
 import cats.data.{EitherT, OptionT}
 import cats.effect.IO
 import cats.instances.list.*
-import cats.syntax.option.*
+import cats.syntax.all.*
 import pspsps.syntax.common.*
 import fs2.Stream
 
-val input: IO[Option[Int]] = IO.pure(Some(42))
+val input: IO[Option[Int]] = 42.some.pure[IO]
 val wrapped: OptionT[IO, Int] = input.asOptionT
-val lifted: OptionT[IO, Int] = Option(42).asOptionT[IO]
-val plainEither: Either[String, Int] = Right(42)
+val lifted: OptionT[IO, Int] = 42.some.asOptionT[IO]
+val plainEither: Either[String, Int] = 42.asRight[String]
 val either: EitherT[IO, String, Int] = plainEither.asEitherT[IO]
-val evaluated: Stream[IO, Int] = IO.pure(42).asStreamEval
+val evaluated: Stream[IO, Int] = 42.pure[IO].asStreamEval
 ```
 
 ## A complete pipeline
@@ -45,18 +45,18 @@ def update(
 val updates = update(
   "key",
   Content("hello"),
-  (_, content) => IO.pure(Some(content)),
-  content => IO.pure(content)
+  (_, content) => content.some.pure[IO],
+  content => content.pure[IO]
 )
 ```
 
 ## Wrapping, lifting, and pure values are different
 
 ```scala mdoc
-val nested: Option[Option[Int]] = Some(Some(42))
+val nested: Option[Option[Int]] = 42.some.some
 val wrapNested: OptionT[Option, Int] = nested.asOptionTWrap
 val liftNested: OptionT[IO, Option[Int]] = nested.toOptionT[IO]
-val liftEffect: EitherT[IO, String, Int] = IO.pure(42).asEitherTLiftF[String]
+val liftEffect: EitherT[IO, String, Int] = 42.pure[IO].asEitherTLiftF[String]
 val pureValue: EitherT[IO, String, Int] = 42.asEitherTPure[IO, String]
 
 val captureErrors: EitherT[IO, Throwable, Int] =
@@ -73,7 +73,7 @@ errors of the outer effect. `attempt.asEitherT` makes that policy explicit.
 ```scala mdoc
 val oneCollection: Stream[IO, List[Int]] = List(1, 2, 3).asStreamEmit[IO]
 val threeElements: Stream[IO, Int] = List(1, 2, 3).asStreamEmits[IO]
-val evaluatedElements: Stream[IO, Int] = IO.pure(List(1, 2, 3)).asStreamEvals
+val evaluatedElements: Stream[IO, Int] = List(1, 2, 3).pure[IO].asStreamEvals
 val noElements: Stream[IO, Nothing] = IO.unit.asStreamExec
 ```
 
@@ -84,7 +84,7 @@ Neither method promises streaming traversal of an infinite collection.
 ## Resource ownership
 
 ```scala mdoc
-val acquire: IO[String] = IO.pure("connection")
+val acquire: IO[String] = "connection".pure[IO]
 val release: String => IO[Unit] = _ => IO.unit
 val scoped = acquire.asResourceMake(release).asStreamResource
 val unowned = acquire.asResourceEval
@@ -100,7 +100,7 @@ AutoCloseable acquired by blocking code.
 ## Constructors do not repair an eager receiver
 
 Scala evaluates an ordinary receiver expression before calling its extension.
-`IO.pure(openHandle())` has already opened the handle; later syntax cannot undo
+`openHandle().pure[IO]` has already opened the handle; later syntax cannot undo
 that. Suspend with `IO.delay` or `IO.blocking` at the original effect boundary.
 Already-running effects such as Future do not become lazy through this library.
 
@@ -112,10 +112,10 @@ The curated `common` import keeps these specialized families opt-in:
 import pspsps.syntax.kleisli.*
 import pspsps.syntax.writerT.*
 import pspsps.syntax.stateT.*
-val readLength: String => IO[Int] = key => IO.pure(key.length)
+val readLength: String => IO[Int] = key => key.length.pure[IO]
 val lookup = readLength.asKleisli
 val logAndResult = (List("read"), 42).asWriterTFromTuple[IO]
-val stateTransition: Int => IO[(Int, String)] = n => IO.pure((n + 1, n.toString))
+val stateTransition: Int => IO[(Int, String)] = n => (n + 1, n.toString).pure[IO]
 val state = stateTransition.asStateT
 val initialRef = 0.asRef[IO]
 ```
@@ -146,15 +146,15 @@ val conditionalEither: Either[String, Int] =
 val conditionalOption: Option[Int] =
   pspsps.builders.Option.cond(true).withSome(42)
 val conditionalEitherT: EitherT[IO, String, Int] =
-  pspsps.builders.EitherT.cond(IO.pure(true)).withLeft("missing").withRight(IO.pure(42))
+  pspsps.builders.EitherT.cond(true.pure[IO]).withLeft("missing").withRight(42.pure[IO])
 val conditionalOptionT: OptionT[IO, Int] =
-  pspsps.builders.OptionT.cond(IO.pure(true)).withSome(IO.pure(42))
+  pspsps.builders.OptionT.cond(true.pure[IO]).withSome(42.pure[IO])
 val conditionalPureTest: EitherT[IO, String, Int] =
-  pspsps.builders.EitherT.cond[IO](true).withRight(42).withLeft(IO.pure("missing"))
+  pspsps.builders.EitherT.cond[IO](true).withRight(42).withLeft("missing".pure[IO])
 
-assert(conditionalEither == Right(42))
-assert(conditionalOption == Some(42))
-assert(pspsps.builders.Option.cond(false).withSome[Int](sys.error("unselected")) == None)
+assert(conditionalEither == 42.asRight[String])
+assert(conditionalOption == 42.some)
+assert(pspsps.builders.Option.cond(false).withSome[Int](sys.error("unselected")) == none[Int])
 ```
 
 The postfix spelling needs only the normal syntax import:
@@ -165,7 +165,7 @@ val postfixEither: Either[String, Int] =
 val postfixOption: Option[Int] =
   true.asOptionCond.withSome(42)
 val postfixEitherT: EitherT[IO, String, Int] =
-  IO.pure(true).asEitherTCond.withLeft("missing").withRight(IO.pure(42))
+  true.pure[IO].asEitherTCond.withLeft("missing").withRight(42.pure[IO])
 val postfixOptionT: OptionT[IO, Int] =
   true.asOptionTCond[IO].withSome(42)
 ```
@@ -177,7 +177,7 @@ An explicitly pure transformer branch can retain an effect as the payload:
 
 ```scala mdoc
 val storedEffect: OptionT[IO, IO[Int]] =
-  pspsps.builders.OptionT.condPure[IO](true).withSomePure(IO.pure(42))
+  pspsps.builders.OptionT.condPure[IO](true).withSomePure(42.pure[IO])
 ```
 
 ## Continue reading

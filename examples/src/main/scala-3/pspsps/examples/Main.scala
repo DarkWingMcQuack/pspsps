@@ -17,6 +17,7 @@
 package pspsps.examples
 
 import cats.effect.{IO, IOApp}
+import cats.syntax.all.*
 import pspsps.syntax.common.*
 import fs2.Stream
 
@@ -30,9 +31,9 @@ object Main extends IOApp.Simple:
 
   private val acquire: IO[Store] = IO.delay(new Store:
     def current(key: String, content: Content): IO[Option[Content]] =
-      IO.pure(Option.when(key.nonEmpty)(content))
-    def save(content: Content): IO[Content] = IO.pure(content)
-    def close: IO[Unit] = IO.unit
+      key.nonEmpty.asOptionCond.withSome(content).pure[IO]
+    def save(content: Content): IO[Content] = content.pure[IO]
+    def close: IO[Unit] = ().pure[IO]
   )
 
   private def program(key: String, content: Content): Stream[IO, Content] =

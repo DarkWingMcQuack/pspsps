@@ -5,9 +5,10 @@ for JVM and Scala.js.
 
 ```scala
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.syntax.common.*
 
-val current: IO[Option[String]] = IO.pure(Some("hello"))
+val current: IO[Option[String]] = "hello".some.pure[IO]
 
 val stream = current
   .asOptionT

@@ -12,10 +12,11 @@ bring ScalaCheck or Discipline into their dependency graphs.
 
 ```scala mdoc
 import cats.instances.option.*
+import cats.syntax.all.*
 import pspsps.laws.ConstructorLaws
 
 val constructors = ConstructorLaws[Option]
-val input: Option[Option[Int]] = Some(Some(42))
+val input: Option[Option[Int]] = 42.some.some
 val roundTrip = constructors.optionWrap(input)
 val mapping = constructors.optionMap(input, (value: Int) => value + 1)
 ```
@@ -64,7 +65,7 @@ of supplied Either branches changes neither selection nor the effect's order.
 For Option, an absent condition produces no outer result:
 
 ```scala mdoc
-val absent = ConditionalLaws[Option].optionCondition(Option.empty[Boolean], Some(42))
+val absent = ConditionalLaws[Option].optionCondition(none[Boolean], 42.some)
 absent.lhs
 ```
 
@@ -74,11 +75,11 @@ For Either, the error of a failed condition stays in the outer effect:
 import cats.instances.either.*
 
 type ErrorOr[A] = Either[String, A]
-val failedCondition: ErrorOr[Boolean] = Left("condition failed")
+val failedCondition: ErrorOr[Boolean] = "condition failed".asLeft[Boolean]
 val failed = ConditionalLaws[ErrorOr].eitherCondition[String, Int](
   failedCondition,
-  Right("missing"),
-  Right(42)
+  "missing".asRight[String],
+  42.asRight[String]
 )
 failed.lhs
 ```

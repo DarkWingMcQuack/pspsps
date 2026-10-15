@@ -11,11 +11,11 @@ Nested shapes benefit from explicit names:
 ```scala mdoc
 import cats.data.{EitherT, OptionT}
 import cats.effect.IO
-import cats.syntax.option.*
+import cats.syntax.all.*
 import pspsps.syntax.common.*
 import fs2.{Pull, Stream}
 
-val nested: Option[Option[Int]] = Some(Some(42))
+val nested: Option[Option[Int]] = 42.some.some
 val wrapped: OptionT[Option, Int] = nested.asOptionTWrap
 val lifted: OptionT[IO, Option[Int]] = nested.toOptionT[IO]
 ```
@@ -42,7 +42,7 @@ when the application executes the outer effect.
 An effect can evaluate to a value without acquiring a cleanup obligation:
 
 ```scala mdoc
-val acquire: IO[String] = IO.pure("connection")
+val acquire: IO[String] = "connection".pure[IO]
 val release: String => IO[Unit] = _ => IO.unit
 
 val evaluated = acquire.asResourceEval
@@ -60,7 +60,7 @@ canceled before returning its value must clean up any partial acquisition itself
 ## Suspend effects at their source
 
 Scala evaluates an ordinary receiver before calling its extension.
-`IO.pure(openHandle())` has already called `openHandle`; a later constructor cannot
+`openHandle().pure[IO]` has already called `openHandle`; a later constructor cannot
 make that call lazy. Use `IO.delay(openHandle())` or `IO.blocking(openHandle())`
 at the original effect boundary. Already-started Future values retain Future's
 execution behavior.
@@ -74,9 +74,9 @@ import pspsps.syntax.pull.*
 
 val oneList: Stream[IO, List[Int]] = List(1, 2, 3).asStreamEmit[IO]
 val threeInts: Stream[IO, Int] = List(1, 2, 3).asStreamEmits[IO]
-val caught: Stream[IO, Either[Throwable, Int]] = IO.pure(42).asStreamAttemptEval
-val fromChunk: Stream[IO, Int] = IO.pure(fs2.Chunk(1, 2, 3)).asStreamEvalUnChunk
-val terminalResult: Pull[IO, Nothing, Int] = IO.pure(42).asPullEval
+val caught: Stream[IO, Either[Throwable, Int]] = 42.pure[IO].asStreamAttemptEval
+val fromChunk: Stream[IO, Int] = fs2.Chunk(1, 2, 3).pure[IO].asStreamEvalUnChunk
+val terminalResult: Pull[IO, Nothing, Int] = 42.pure[IO].asPullEval
 val emittedValue: Pull[IO, Int, Unit] = 42.asPullOutput1[IO]
 ```
 

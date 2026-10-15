@@ -8,6 +8,7 @@ These builders live in `pspsps-core` and add no dependencies.
 
 ```scala mdoc:reset
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.builders.{Either, EitherT, Option, OptionT}
 
 val pureEither: Either[String, Int] =
@@ -17,12 +18,12 @@ val pureOption: Option[Int] =
   Option.cond(true).withSome(42)
 
 val checked: EitherT[IO, String, Int] =
-  EitherT.cond(IO.pure(true))
+  EitherT.cond(true.pure[IO])
     .withLeft("missing")
-    .withRight(IO.pure(42))
+    .withRight(42.pure[IO])
 
 val optional: OptionT[IO, Int] =
-  OptionT.cond(IO.pure(true)).withSome(IO.pure(42))
+  OptionT.cond(true.pure[IO]).withSome(42.pure[IO])
 
 // A pure Boolean does not identify an outer effect: supply F explicitly.
 val pureTest: EitherT[IO, String, Int] =
@@ -59,6 +60,7 @@ use `*` and `as`. Both versions support the same staged branch API.
 
 ```scala mdoc:reset
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.syntax.common.*
 
 val a: Either[String, Int] =
@@ -68,10 +70,10 @@ val b: Option[Int] =
   true.asOptionCond.withSome(42)
 
 val c: cats.data.EitherT[IO, String, Int] =
-  IO.pure(true).asEitherTCond.withLeft("missing").withRight(IO.pure(42))
+  true.pure[IO].asEitherTCond.withLeft("missing").withRight(42.pure[IO])
 
 val d: cats.data.OptionT[IO, Int] =
-  IO.pure(true).asOptionTCond.withSome(IO.pure(42))
+  true.pure[IO].asOptionTCond.withSome(42.pure[IO])
 
 val e: cats.data.EitherT[IO, String, Int] =
   true.asEitherTCond[IO].withLeft("missing").withRight(42)
@@ -116,16 +118,17 @@ Every row also works with Right supplied first:
 
 ```scala mdoc:reset
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.builders.EitherT
 
 EitherT.cond[IO](true).withLeft("no").withRight(42)
-EitherT.cond[IO](true).withLeft(IO.pure("no")).withRight(42)
-EitherT.cond[IO](true).withLeft("no").withRight(IO.pure(42))
-EitherT.cond[IO](true).withLeft(IO.pure("no")).withRight(IO.pure(42))
-EitherT.cond(IO.pure(true)).withLeft("no").withRight(42)
-EitherT.cond(IO.pure(true)).withLeft(IO.pure("no")).withRight(42)
-EitherT.cond(IO.pure(true)).withLeft("no").withRight(IO.pure(42))
-EitherT.cond(IO.pure(true)).withLeft(IO.pure("no")).withRight(IO.pure(42))
+EitherT.cond[IO](true).withLeft("no".pure[IO]).withRight(42)
+EitherT.cond[IO](true).withLeft("no").withRight(42.pure[IO])
+EitherT.cond[IO](true).withLeft("no".pure[IO]).withRight(42.pure[IO])
+EitherT.cond(true.pure[IO]).withLeft("no").withRight(42)
+EitherT.cond(true.pure[IO]).withLeft("no".pure[IO]).withRight(42)
+EitherT.cond(true.pure[IO]).withLeft("no").withRight(42.pure[IO])
+EitherT.cond(true.pure[IO]).withLeft("no".pure[IO]).withRight(42.pure[IO])
 ```
 
 OptionT accepts the analogous four combinations of test and Some payload.
@@ -147,15 +150,16 @@ payloads:
 
 ```scala mdoc:reset
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.builders.{EitherT, OptionT}
 
-EitherT.condF(IO.pure(true))
+EitherT.condF(true.pure[IO])
   .withLeftPure("missing")
-  .withRightF(IO.pure(42))
+  .withRightF(42.pure[IO])
 
 // Store IO[Int] as the payload, instead of interpreting it as the outer effect.
 val nested: cats.data.OptionT[IO, IO[Int]] =
-  OptionT.condPure[IO](true).withSomePure(IO.pure(42))
+  OptionT.condPure[IO](true).withSomePure(42.pure[IO])
 ```
 
 Explicit spellings are `condPure[F]`, `condF`, `withLeftPure`, `withLeftF`,
@@ -212,12 +216,13 @@ values; an effect can itself be such a value:
 
 ```scala mdoc:reset
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.builders.{Either, Option}
 
 val a: Either[String, IO[Int]] =
-  Either.cond(true).withLeft("missing").withRight(IO.pure(42))
+  Either.cond(true).withLeft("missing").withRight(42.pure[IO])
 val b: Option[IO[Int]] =
-  Option.cond(true).withSome(IO.pure(42))
+  Option.cond(true).withSome(42.pure[IO])
 ```
 
 For an effectful condition, use EitherT or OptionT. Their `.value` returns
