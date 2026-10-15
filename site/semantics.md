@@ -37,6 +37,17 @@ val captureFailure: EitherT[IO, Throwable, Int] = operation.attempt.asEitherT
 Constructing these values runs no IO. Their failures and results are observed
 when the application executes the outer effect.
 
+```scala mdoc
+val streamError = new RuntimeException("stream failure")
+val rejectedStream: Stream[IO, Int] = streamError.asLeft[Int].asStreamFromEither[IO]
+val capturedStream: Stream[IO, Int] = captureFailure.asStreamFromEitherT
+```
+
+The Option and OptionT stream conversions emit the Some payload or an empty
+stream for None. The Either and EitherT conversions emit Right payloads and
+fail with the original Throwable from Left; EitherT also preserves failures
+of its outer effect. The IO actions run when their streams are consumed.
+
 ## Resource ownership
 
 An effect can evaluate to a value without acquiring a cleanup obligation:

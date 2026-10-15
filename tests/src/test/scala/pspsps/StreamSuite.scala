@@ -19,6 +19,7 @@ package pspsps
 import cats.effect.{Deferred, IO, Ref}
 import cats.effect.testkit.TestControl
 import cats.instances.list._
+import cats.syntax.all._
 import pspsps.syntax.all._
 import fs2.{Chunk, Stream}
 import munit.CatsEffectSuite
@@ -135,6 +136,88 @@ class StreamSuite extends CatsEffectSuite {
       assertEquals(some, List(42))
       assertEquals(none, Nil)
     }
+  }
+
+  test("fromOptionT evaluates only when demanded and again on each compilation") {
+    for {
+      count <- 0.asRef[IO]
+      stream = count.updateAndGet(_ + 1).map(_.some).asOptionT.asStreamFromOptionT
+      before <- count.get
+      _ <- stream.take(0).compile.drain
+      skipped <- count.get
+      first <- stream.compile.toList
+      second <- stream.compile.toList
+    } yield {
+      assertEquals(before, 0)
+      assertEquals(skipped, 0)
+      assertEquals(first, List(1))
+      assertEquals(second, List(2))
+    }
+  }
+
+  test("fromOptionT emits nothing for None") {
+    none[Int].pure[IO].asOptionT.asStreamFromOptionT.compile.toList.map { result =>
+      assertEquals(result, Nil)
+    }
+  }
+
+  test("fromOptionT preserves outer effect failures") {
+    val boom = new RuntimeException("outer")
+    IO.raiseError[Option[Int]](boom).asOptionT.asStreamFromOptionT.compile.toList.attempt.map {
+      result => assertEquals(result, boom.asLeft[List[Int]])
+    }
+  }
+
+  test("fromEither emits Right as a singleton") {
+    42.asRight[RuntimeException].asStreamFromEither[IO].compile.toList.map { result =>
+      assertEquals(result, List(42))
+    }
+  }
+
+  test("fromEither fails with the Throwable in Left") {
+    val boom = new IllegalArgumentException("left")
+    boom.asLeft[Int].asStreamFromEither[IO].compile.toList.attempt.map { result =>
+      assertEquals(result, boom.asLeft[List[Int]])
+    }
+  }
+
+  test("fromEitherT evaluates only when demanded and again on each compilation") {
+    for {
+      count <- 0.asRef[IO]
+      stream = count
+        .updateAndGet(_ + 1)
+        .map(_.asRight[IllegalArgumentException])
+        .asEitherT
+        .asStreamFromEitherT
+      before <- count.get
+      _ <- stream.take(0).compile.drain
+      skipped <- count.get
+      first <- stream.compile.toList
+      second <- stream.compile.toList
+    } yield {
+      assertEquals(before, 0)
+      assertEquals(skipped, 0)
+      assertEquals(first, List(1))
+      assertEquals(second, List(2))
+    }
+  }
+
+  test("fromEitherT fails with the Throwable in Left") {
+    val boom = new IllegalArgumentException("left")
+    boom.asLeft[Int].pure[IO].asEitherT.asStreamFromEitherT.compile.toList.attempt.map { result =>
+      assertEquals(result, boom.asLeft[List[Int]])
+    }
+  }
+
+  test("fromEitherT preserves outer effect failures") {
+    val boom = new RuntimeException("outer")
+    IO.raiseError[Either[IllegalArgumentException, Int]](boom)
+      .asEitherT
+      .asStreamFromEitherT
+      .compile
+      .toList
+      .attempt
+      .map { result => assertEquals(result, boom.asLeft[List[Int]]) }
   }
 
   test("resource releases after successful stream use") {

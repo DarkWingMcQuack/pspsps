@@ -17,8 +17,9 @@
 package pspsps.syntax
 
 import cats.Foldable
+import cats.data.{EitherT, OptionT}
 import cats.effect.kernel.{MonadCancel, Resource, Temporal}
-import fs2.{Chunk, Stream}
+import fs2.{Chunk, RaiseThrowable, Stream}
 import scala.concurrent.duration.FiniteDuration
 
 /** Postfix FS2 constructors with no extra execution, buffering, or scopes. */
@@ -68,6 +69,19 @@ trait StreamSyntax:
   extension [A](value: Option[A])
     /** Emit zero or one element according to the Option. */
     def asStreamFromOption[F[_]]: Stream[F, A] = Stream.fromOption[F](value)
+
+  extension [F[_], A](value: OptionT[F, A])
+    /** Evaluate when pulled, emitting Some's value or nothing for None. */
+    def asStreamFromOptionT: Stream[F, A] = Stream.eval(value.value).unNone
+
+  extension [E <: Throwable, A](value: Either[E, A])
+    /** Emit Right's value or fail with the Throwable in Left. */
+    def asStreamFromEither[F[_]: RaiseThrowable]: Stream[F, A] = Stream.fromEither[F](value)
+
+  extension [F[_], E <: Throwable, A](value: EitherT[F, E, A])
+    /** Evaluate when pulled, emitting Right's value or failing with Left's Throwable. */
+    def asStreamFromEitherT(using RaiseThrowable[F]): Stream[F, A] =
+      Stream.eval(value.value).rethrow
 
   extension (duration: FiniteDuration)
     /** Sleep, then emit Unit. */

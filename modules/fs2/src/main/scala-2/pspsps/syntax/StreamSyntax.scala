@@ -17,8 +17,9 @@
 package pspsps.syntax
 
 import cats.Foldable
+import cats.data.{EitherT, OptionT}
 import cats.effect.kernel.{MonadCancel, Resource, Temporal}
-import fs2.{Chunk, Stream}
+import fs2.{Chunk, RaiseThrowable, Stream}
 import scala.concurrent.duration.FiniteDuration
 
 /** Postfix FS2 constructors with no extra execution, buffering, or scopes. */
@@ -85,6 +86,27 @@ trait StreamSyntax {
 
     /** Emit zero or one element according to the Option. */
     def asStreamFromOption[F[_]]: Stream[F, A] = Stream.fromOption[F](value)
+  }
+
+  implicit final class StreamOptionTOps[F[_], A](private val value: OptionT[F, A]) {
+
+    /** Evaluate when pulled, emitting Some's value or nothing for None. */
+    def asStreamFromOptionT: Stream[F, A] = Stream.eval(value.value).unNone
+  }
+
+  implicit final class StreamEitherOps[E <: Throwable, A](private val value: Either[E, A]) {
+
+    /** Emit Right's value or fail with the Throwable in Left. */
+    def asStreamFromEither[F[_]: RaiseThrowable]: Stream[F, A] = Stream.fromEither[F](value)
+  }
+
+  implicit final class StreamEitherTOps[F[_], E <: Throwable, A](
+      private val value: EitherT[F, E, A]
+  ) {
+
+    /** Evaluate when pulled, emitting Right's value or failing with Left's Throwable. */
+    def asStreamFromEitherT(implicit F: RaiseThrowable[F]): Stream[F, A] =
+      Stream.eval(value.value).rethrow
   }
 
   implicit final class StreamDurationOps(private val duration: FiniteDuration) {

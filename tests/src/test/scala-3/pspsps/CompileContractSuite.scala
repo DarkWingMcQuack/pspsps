@@ -19,11 +19,11 @@ package pspsps
 import cats.data.{EitherT, Kleisli, OptionT, StateT, WriterT}
 import cats.effect.kernel.Resource
 import pspsps.syntax.all.*
-import fs2.{Pull, Stream}
+import fs2.{Pull, RaiseThrowable, Stream}
 import munit.FunSuite
 import scala.compiletime.testing.typeChecks
 
-/** These declarations must compile with NO instances for F. */
+/** Constructors require no instances for F except explicit error-raising evidence. */
 object CompileContracts:
   def option[F[_], A](value: F[Option[A]]): OptionT[F, A] = value.asOptionT
   def either[F[_], E, A](value: F[Either[E, A]]): EitherT[F, E, A] = value.asEitherT
@@ -32,6 +32,14 @@ object CompileContracts:
   def state[F[_], S, A](value: F[S => F[(S, A)]]): StateT[F, S, A] = value.asStateTApplyF
   def stream[F[_], A](value: F[A]): Stream[F, A] = value.asStreamEval
   def attempt[F[_], A](value: F[A]): Stream[F, Either[Throwable, A]] = value.asStreamAttemptEval
+  def optionStream[F[_], A](value: Option[A]): Stream[F, A] = value.asStreamFromOption[F]
+  def optionTStream[F[_], A](value: OptionT[F, A]): Stream[F, A] = value.asStreamFromOptionT
+  def eitherStream[F[_]: RaiseThrowable, E <: Throwable, A](value: Either[E, A]): Stream[F, A] =
+    value.asStreamFromEither[F]
+  def eitherTStream[F[_]: RaiseThrowable, E <: Throwable, A](
+      value: EitherT[F, E, A]
+  ): Stream[F, A] =
+    value.asStreamFromEitherT
   def pull[F[_], A](value: F[A]): Pull[F, Nothing, A] = value.asPullEval
   def resource[F[_], A](value: F[A]): Resource[F, A] = value.asResourceEval
   def pureResource[F[_], A](value: A): Resource[F, A] = value.asResourcePure[F]
@@ -111,6 +119,23 @@ class CompileContractSuite extends FunSuite:
       import cats.effect.IO
       import pspsps.syntax.all.*
       val result = IO.pure(1).asStreamExec
+    """))
+  }
+
+  test("stream conversions reject non-Throwable Left values") {
+    assert(!typeChecks("""
+      import cats.effect.IO
+      import cats.syntax.all.*
+      import pspsps.syntax.all.*
+      val input = "domain".asLeft[Int]
+      val result = input.asStreamFromEither[IO]
+    """))
+    assert(!typeChecks("""
+      import cats.effect.IO
+      import cats.syntax.all.*
+      import pspsps.syntax.all.*
+      val input = "domain".asLeft[Int].pure[IO].asEitherT
+      val result = input.asStreamFromEitherT
     """))
   }
 

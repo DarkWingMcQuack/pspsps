@@ -38,9 +38,7 @@ def update(
     .asOptionT
     .filter(_.value.nonEmpty)
     .semiflatMap(save)
-    .value
-    .asStreamEval
-    .unNone
+    .asStreamFromOptionT
 
 val updates = update(
   "key",
@@ -80,6 +78,15 @@ val noElements: Stream[IO, Nothing] = IO.unit.asStreamExec
 `asStreamEmits` and `asStreamEvals` are for finite collections.
 `asStreamEvals` follows FS2's conversion of the Foldable to a List.
 Neither method promises streaming traversal of an infinite collection.
+
+## Optional and fallible streams
+
+```scala mdoc
+val fromOption: Stream[IO, Int] = 42.some.asStreamFromOption[IO]
+val fromOptionT: Stream[IO, Int] = 42.some.pure[IO].asOptionT.asStreamFromOptionT
+val fromEither: Stream[IO, Int] = 42.asRight[Throwable].asStreamFromEither[IO]
+val fromEitherT: Stream[IO, Int] = 42.asRight[Throwable].pure[IO].asEitherT.asStreamFromEitherT
+```
 
 ## Resource ownership
 

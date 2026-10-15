@@ -46,9 +46,7 @@ object Main extends IOApp.Simple:
           .asOptionT
           .filter(_.value.nonEmpty)
           .semiflatMap(store.save)
-          .value
-          .asStreamEval
-          .unNone
+          .asStreamFromOptionT
       }
 
   val run: IO[Unit] =

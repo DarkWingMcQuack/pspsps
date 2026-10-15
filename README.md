@@ -13,9 +13,7 @@ val current: IO[Option[String]] = "hello".some.pure[IO]
 val stream = current
   .asOptionT
   .filter(_.nonEmpty)
-  .value
-  .asStreamEval
-  .unNone
+  .asStreamFromOptionT
 ```
 
 Use `common._` on Scala 2.13. `common` covers everyday constructors; `all`
