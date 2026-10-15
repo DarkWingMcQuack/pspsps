@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 42 42" role="img" aria-labelledby="title">
-  <title id="title">pspsps cat</title>
-  <g fill="none" stroke="#8061c4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M8 16V5l8 6a18 18 0 0 1 10 0l8-6v11c3 3 4 6 4 9 0 7-7 11-17 11S4 32 4 25c0-3 1-6 4-9Z"/>
-    <path d="M13 22h1m14 0h1m-10 6 2 2 2-2M2 23l7 2m-7 6 7-2m31-6-7 2m7 6-7-2"/>
-  </g>
-</svg>
