@@ -10,5 +10,6 @@ project/project/
 *.class
 .DS_Store
 .direnv/
+.envrc
 result
 result-*
