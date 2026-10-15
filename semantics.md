@@ -42,7 +42,7 @@ val keepFailure: EitherT[IO, String, Int] = operation.asEitherTLiftF[String]
 // keepFailure: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Error(java.lang.RuntimeException: unavailable),
-//     f = cats.data.EitherT$RightPartiallyApplied$$$Lambda$12706/0x00007fce6df94208@2931c529,
+//     f = cats.data.EitherT$RightPartiallyApplied$$$Lambda$13706/0x00007f36520de0b8@5b1a9163,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -55,6 +55,20 @@ val captureFailure: EitherT[IO, Throwable, Int] = operation.attempt.asEitherT
 Constructing these values runs no IO. Their failures and results are observed
 when the application executes the outer effect.
 
+```scala
+val streamError = new RuntimeException("stream failure")
+// streamError: RuntimeException = java.lang.RuntimeException: stream failure
+val rejectedStream: Stream[IO, Int] = streamError.asLeft[Int].asStreamFromEither[IO]
+// rejectedStream: Stream[[A >: Nothing <: Any] => IO[A], Int] = Stream(..)
+val capturedStream: Stream[IO, Int] = captureFailure.asStreamFromEitherT
+// capturedStream: Stream[[A >: Nothing <: Any] => IO[A], Int] = Stream(..)
+```
+
+The Option and OptionT stream conversions emit the Some payload or an empty
+stream for None. The Either and EitherT conversions emit Right payloads and
+fail with the original Throwable from Left; EitherT also preserves failures
+of its outer effect. The IO actions run when their streams are consumed.
+
 ## Resource ownership
 
 An effect can evaluate to a value without acquiring a cleanup obligation:
@@ -63,13 +77,13 @@ An effect can evaluate to a value without acquiring a cleanup obligation:
 val acquire: IO[String] = "connection".pure[IO]
 // acquire: IO[String] = Pure("connection")
 val release: String => IO[Unit] = _ => IO.unit
-// release: Function1[String, IO[Unit]] = repl.MdocSession$MdocApp$$Lambda$12928/0x00007fce6e012440@7fff8611
+// release: Function1[String, IO[Unit]] = repl.MdocSession$MdocApp$$Lambda$13934/0x00007f365215ecc0@58c83056
 
 val evaluated = acquire.asResourceEval
 // evaluated: Resource[IO, String] = Eval(Pure("connection"))
 val managed = acquire.asResourceMake(release)
 // managed: Resource[IO, String] = Allocate(
-//   cats.effect.kernel.Resource$$$Lambda$12714/0x00007fce6df9da40@1e2ad08f
+//   cats.effect.kernel.Resource$$$Lambda$13720/0x00007f36520e9b48@407d4de
 // )
 val scoped: Stream[IO, String] = managed.asStreamResource
 // scoped: Stream[[A >: Nothing <: Any] => IO[A], String] = Stream(..)

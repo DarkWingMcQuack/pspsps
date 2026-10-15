@@ -16,7 +16,7 @@ import cats.syntax.all.*
 import pspsps.laws.ConstructorLaws
 
 val constructors = ConstructorLaws[Option]
-// constructors: ConstructorLaws[[A >: Nothing <: Any] => Option[A]] = pspsps.laws.ConstructorLaws@79e13924
+// constructors: ConstructorLaws[[A >: Nothing <: Any] => Option[A]] = pspsps.laws.ConstructorLaws@7532a44f
 val input: Option[Option[Int]] = 42.some.some
 // input: Option[Option[Int]] = Some(Some(42))
 val roundTrip = constructors.optionWrap(input)
@@ -60,7 +60,7 @@ import cats.instances.list.*
 import pspsps.laws.ConditionalLaws
 
 val conditional = ConditionalLaws[List]
-// conditional: ConditionalLaws[List] = pspsps.laws.ConditionalLaws@ab93215
+// conditional: ConditionalLaws[List] = pspsps.laws.ConditionalLaws@f4639e7
 val selected = conditional.eitherCondition(List(true, false), List("missing"), List(42))
 // selected: IsEq[List[Either[String, Int]]] = IsEq(
 //   lhs = List(Right(42), Left("missing")),
@@ -130,15 +130,15 @@ Create rulesets for the outer effect you want to check:
 import pspsps.laws.discipline.{ConditionalTests, ConstructorTests}
 
 val optionRules = ConstructorTests[Option].optionT[Int]
-// optionRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@5f1e174c
+// optionRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@6853370d
 val eitherRules = ConstructorTests[Option].eitherT[String, Int]
-// eitherRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@3c9e86d9
+// eitherRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@50e60b44
 val listConditionalRules = ConditionalTests[List].eitherT[String, Int]
-// listConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@39acef55
+// listConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@32a271b3
 val optionalConditionalRules = ConditionalTests[Option].optionT[Int]
-// optionalConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@53a72495
+// optionalConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@74825dd4
 val errorConditionalRules = ConditionalTests[ErrorOr].eitherT[String, Int]
-// errorConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@39386605
+// errorConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@5898699f
 ```
 
 Register these using Discipline MUnit's `checkAll`. Provide Applicative or

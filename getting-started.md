@@ -50,9 +50,7 @@ def update(
     .asOptionT
     .filter(_.value.nonEmpty)
     .semiflatMap(save)
-    .value
-    .asStreamEval
-    .unNone
+    .asStreamFromOptionT
 
 val updates = update(
   "key",
@@ -80,7 +78,7 @@ val liftEffect: EitherT[IO, String, Int] = 42.pure[IO].asEitherTLiftF[String]
 // liftEffect: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = cats.data.EitherT$RightPartiallyApplied$$$Lambda$12706/0x00007fce6df94208@2931c529,
+//     f = cats.data.EitherT$RightPartiallyApplied$$$Lambda$13706/0x00007f36520de0b8@5b1a9163,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -118,13 +116,26 @@ val noElements: Stream[IO, Nothing] = IO.unit.asStreamExec
 `asStreamEvals` follows FS2's conversion of the Foldable to a List.
 Neither method promises streaming traversal of an infinite collection.
 
+## Optional and fallible streams
+
+```scala
+val fromOption: Stream[IO, Int] = 42.some.asStreamFromOption[IO]
+// fromOption: Stream[[A >: Nothing <: Any] => IO[A], Int] = Stream(..)
+val fromOptionT: Stream[IO, Int] = 42.some.pure[IO].asOptionT.asStreamFromOptionT
+// fromOptionT: Stream[[A >: Nothing <: Any] => IO[A], Int] = Stream(..)
+val fromEither: Stream[IO, Int] = 42.asRight[Throwable].asStreamFromEither[IO]
+// fromEither: Stream[[A >: Nothing <: Any] => IO[A], Int] = Stream(..)
+val fromEitherT: Stream[IO, Int] = 42.asRight[Throwable].pure[IO].asEitherT.asStreamFromEitherT
+// fromEitherT: Stream[[A >: Nothing <: Any] => IO[A], Int] = Stream(..)
+```
+
 ## Resource ownership
 
 ```scala
 val acquire: IO[String] = "connection".pure[IO]
 // acquire: IO[String] = Pure("connection")
 val release: String => IO[Unit] = _ => IO.unit
-// release: Function1[String, IO[Unit]] = repl.MdocSession$MdocApp$$Lambda$12711/0x00007fce6df92940@8ca642f
+// release: Function1[String, IO[Unit]] = repl.MdocSession$MdocApp$$Lambda$13717/0x00007f36520db1c0@473d313
 val scoped = acquire.asResourceMake(release).asStreamResource
 // scoped: Stream[IO, String] = Stream(..)
 val unowned = acquire.asResourceEval
@@ -154,22 +165,22 @@ import pspsps.syntax.kleisli.*
 import pspsps.syntax.writerT.*
 import pspsps.syntax.stateT.*
 val readLength: String => IO[Int] = key => key.length.pure[IO]
-// readLength: Function1[String, IO[Int]] = repl.MdocSession$MdocApp$$Lambda$12719/0x00007fce6df93370@3d89fe4e
+// readLength: Function1[String, IO[Int]] = repl.MdocSession$MdocApp$$Lambda$13725/0x00007f36520dbbf0@2b11ce7b
 val lookup = readLength.asKleisli
 // lookup: Kleisli[IO, String, Int] = Kleisli(
-//   repl.MdocSession$MdocApp$$Lambda$12719/0x00007fce6df93370@3d89fe4e
+//   repl.MdocSession$MdocApp$$Lambda$13725/0x00007f36520dbbf0@2b11ce7b
 // )
 val logAndResult = (List("read"), 42).asWriterTFromTuple[IO]
 // logAndResult: WriterT[[A >: Nothing <: Any] => IO[A], List[String], Int] = WriterT(
 //   Pure((List("read"), 42))
 // )
 val stateTransition: Int => IO[(Int, String)] = n => (n + 1, n.toString).pure[IO]
-// stateTransition: Function1[Int, IO[Tuple2[Int, String]]] = repl.MdocSession$MdocApp$$Lambda$12720/0x00007fce6dfb8000@25f1c01a
+// stateTransition: Function1[Int, IO[Tuple2[Int, String]]] = repl.MdocSession$MdocApp$$Lambda$13726/0x00007f36520f0660@55a785bf
 val state = stateTransition.asStateT
-// state: IndexedStateT[IO, Int, Int, String] = cats.data.IndexedStateT@472f0f52
+// state: IndexedStateT[IO, Int, Int, String] = cats.data.IndexedStateT@68b2814e
 val initialRef = 0.asRef[IO]
 // initialRef: IO[Ref[[A >: Nothing <: Any] => IO[A], Int]] = Delay(
-//   thunk = cats.effect.IO$$$Lambda$12721/0x00007fce6dfbe200@37a34ff1,
+//   thunk = cats.effect.IO$$$Lambda$13727/0x00007f3652108660@60f68e41,
 //   event = cats.effect.tracing.TracingEvent$StackTrace
 // )
 ```
@@ -210,7 +221,7 @@ val conditionalEitherT: EitherT[IO, String, Int] =
 // conditionalEitherT: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@43e0786b,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@59949c17,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -219,7 +230,7 @@ val conditionalOptionT: OptionT[IO, Int] =
 // conditionalOptionT: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@491b33,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@26a48819,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -228,7 +239,7 @@ val conditionalPureTest: EitherT[IO, String, Int] =
 // conditionalPureTest: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithRight$$Lambda$12734/0x00007fce6dfbf1d0@4aef89e6,
+//     f = pspsps.builders.EitherWithRight$$Lambda$13740/0x00007f3652109630@6cce9c89,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -252,7 +263,7 @@ val postfixEitherT: EitherT[IO, String, Int] =
 // postfixEitherT: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@679e8b8d,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@381e93d7,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -261,7 +272,7 @@ val postfixOptionT: OptionT[IO, Int] =
 // postfixOptionT: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.OptionCondition$$Lambda$12208/0x00007fce6dec85e8@169848a0,
+//     f = pspsps.builders.OptionCondition$$Lambda$13207/0x00007f365200d3e0@4f6c39eb,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -278,7 +289,7 @@ val storedEffect: OptionT[IO, IO[Int]] =
 // storedEffect: OptionT[[A >: Nothing <: Any] => IO[A], IO[Int]] = OptionT(
 //   Map(
 //     ioe = Pure(Pure(42)),
-//     f = pspsps.builders.OptionCondition$$Lambda$12208/0x00007fce6dec85e8@169848a0,
+//     f = pspsps.builders.OptionCondition$$Lambda$13207/0x00007f365200d3e0@4f6c39eb,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )

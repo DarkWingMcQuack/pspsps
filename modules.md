@@ -66,7 +66,7 @@ val increased: OptionT[IO, Int] = optional.map(_ + 1)
 // increased: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   Map(
 //     ioe = Pure(Some(42)),
-//     f = cats.data.OptionT$$Lambda$12809/0x00007fce6dfdc278@1bb6e54a,
+//     f = cats.data.OptionT$$Lambda$13815/0x00007f3652126368@7423ad5f,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )

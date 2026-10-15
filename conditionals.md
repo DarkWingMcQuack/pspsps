@@ -26,7 +26,7 @@ val checked: EitherT[IO, String, Int] =
 // checked: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@157b3db4,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@2e9ff51a,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -36,7 +36,7 @@ val optional: OptionT[IO, Int] =
 // optional: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@4f8c1b80,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@1cba1909,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -47,7 +47,7 @@ val pureTest: EitherT[IO, String, Int] =
 // pureTest: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$13205/0x00007f365200d018@71fe7879,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -57,7 +57,7 @@ val pureOptionTest: OptionT[IO, Int] =
 // pureOptionTest: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.OptionCondition$$Lambda$12208/0x00007fce6dec85e8@169848a0,
+//     f = pspsps.builders.OptionCondition$$Lambda$13207/0x00007f365200d3e0@4f6c39eb,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -80,7 +80,7 @@ val aliased = EitherTBuilder.cond[IO](true).withLeft("missing").withRight(42)
 // aliased: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$13205/0x00007f365200d018@71fe7879,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -113,7 +113,7 @@ val c: cats.data.EitherT[IO, String, Int] =
 // c: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@5a984431,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@4fb6f05d,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -123,7 +123,7 @@ val d: cats.data.OptionT[IO, Int] =
 // d: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@75e714f9,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@308caf3,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -133,7 +133,7 @@ val e: cats.data.EitherT[IO, String, Int] =
 // e: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$13205/0x00007f365200d018@71fe7879,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -143,7 +143,7 @@ val f: cats.data.OptionT[IO, Int] =
 // f: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.OptionCondition$$Lambda$12208/0x00007fce6dec85e8@169848a0,
+//     f = pspsps.builders.OptionCondition$$Lambda$13207/0x00007f365200d3e0@4f6c39eb,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -194,7 +194,7 @@ EitherT.cond[IO](true).withLeft("no").withRight(42)
 // res6: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$13205/0x00007f365200d018@71fe7879,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -202,7 +202,7 @@ EitherT.cond[IO](true).withLeft("no".pure[IO]).withRight(42)
 // res7: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$13205/0x00007f365200d018@71fe7879,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -210,7 +210,7 @@ EitherT.cond[IO](true).withLeft("no").withRight(42.pure[IO])
 // res8: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$13205/0x00007f365200d018@71fe7879,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -218,7 +218,7 @@ EitherT.cond[IO](true).withLeft("no".pure[IO]).withRight(42.pure[IO])
 // res9: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$13205/0x00007f365200d018@71fe7879,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -226,7 +226,7 @@ EitherT.cond(true.pure[IO]).withLeft("no").withRight(42)
 // res10: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@11739f8d,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@137475b,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -234,7 +234,7 @@ EitherT.cond(true.pure[IO]).withLeft("no".pure[IO]).withRight(42)
 // res11: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@45fa184b,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@2fba85f7,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -242,7 +242,7 @@ EitherT.cond(true.pure[IO]).withLeft("no").withRight(42.pure[IO])
 // res12: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@5d5b7509,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@57f6ac45,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -250,7 +250,7 @@ EitherT.cond(true.pure[IO]).withLeft("no".pure[IO]).withRight(42.pure[IO])
 // res13: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@10d6f287,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@12ecab1a,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -284,7 +284,7 @@ EitherT.condF(true.pure[IO])
 // res15: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@1d5488e7,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$13198/0x00007f3652006410@295a3b83,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -295,7 +295,7 @@ val nested: cats.data.OptionT[IO, IO[Int]] =
 // nested: OptionT[[A >: Nothing <: Any] => IO[A], IO[Int]] = OptionT(
 //   Map(
 //     ioe = Pure(Pure(42)),
-//     f = pspsps.builders.OptionCondition$$Lambda$12208/0x00007fce6dec85e8@169848a0,
+//     f = pspsps.builders.OptionCondition$$Lambda$13207/0x00007f365200d3e0@4f6c39eb,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
