@@ -1,13 +1,3 @@
-import laika.ast.{Image, Path}
-import laika.helium.config.{
-  ButtonLink,
-  HeliumIcon,
-  IconLink,
-  ImageLink,
-  LinkPanel,
-  Teaser,
-  TextLink
-}
 import org.typelevel.sbt.gha.{Permissions, PermissionValue}
 
 val repositoryUrl = "https://github.com/DarkWingMcQuack/pspsps"
@@ -71,7 +61,7 @@ val disciplineVersion = "1.7.0"
 
 lazy val root = tlCrossRootProject
   .aggregate(core, effect, streaming, all, laws, tests)
-  .aggregate(docs, examples, unidocs)
+  .aggregate(microsite, examples, unidocs)
 
 lazy val core = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
@@ -150,76 +140,26 @@ lazy val examples = project
     libraryDependencies += "org.typelevel" %% "cats-effect" % catsEffectVersion
   )
 
-lazy val docs = project
-  .in(file("docs"))
-  .enablePlugins(TypelevelSitePlugin)
-  .dependsOn(all.jvm, laws.jvm)
+lazy val microsite = project
+  .in(file("mdoc"))
   .settings(
-    name := "pspsps-docs",
+    name := "pspsps-microsite",
     crossScalaVersions := Seq("3.3.8"),
-    tlSiteIsTypelevelProject := None,
-    tlSiteApiUrl := None,
-    tlSiteHelium := tlSiteHelium.value.site
-      .landingPage(
-        logo = Some(Image.internal(Path.Root / "images" / "cat.svg", alt = Some("pspsps cat"))),
-        title = Some("pspsps"),
-        subtitle = Some("Keep your Scala pipelines flowing."),
-        license = Some("Apache 2.0"),
-        titleLinks = Seq(
-          ButtonLink.internal(Path.Root / "getting-started.md", "Get started"),
-          ButtonLink.internal(Path.Root / "api" / "index.html", "Browse the API")
-        ),
-        linkPanel = Some(
-          LinkPanel(
-            "Documentation",
-            TextLink.internal(Path.Root / "modules.md", "Modules and imports"),
-            TextLink.internal(Path.Root / "conditionals.md", "Conditional builders"),
-            TextLink.internal(Path.Root / "semantics.md", "Evaluation and resource safety"),
-            TextLink.internal(Path.Root / "api.md", "API documentation")
-          )
-        ),
-        projectLinks = Seq(IconLink.external(repositoryUrl, HeliumIcon.github)),
-        teasers = Seq(
-          Teaser(
-            "Read left to right",
-            "Construct transformers, resources, and streams where the value already is."
-          ),
-          Teaser(
-            "Keep familiar types",
-            "Return normal Cats, Cats Effect, and FS2 types with their existing semantics."
-          ),
-          Teaser(
-            "Choose your modules",
-            "Use Cats syntax alone, add effect or streaming syntax, or bring them together with one import."
-          )
-        )
-      )
-      .site
-      .topNavigationBar(
-        homeLink = ImageLink.internal(
-          Path.Root / "README",
-          Image.internal(Path.Root / "images" / "pspsps.svg", alt = Some("pspsps"))
-        ),
-        navLinks = Seq(ButtonLink.internal(Path.Root / "api" / "index.html", "API"))
-      ),
-    libraryDependencies += "org.typelevel" %% "cats-effect" % catsEffectVersion,
-    mdocIn := baseDirectory.value / "src" / "main" / "mdoc",
-    mdocOut := target.value / "mdoc",
-    // Scaladoc joins the site at the Laika stage, which validates the assembled links.
-    mdocExtraArguments += "--no-link-hygiene",
-    Laika / sourceDirectories += target.value / "site-api",
-    siteApi := {
-      val apiDocs = (unidocs / Compile / doc).value
-      val destination = target.value / "site-api"
-      IO.delete(destination)
-      IO.createDirectory(destination)
-      IO.copyDirectory(apiDocs, destination / "api")
+    mdocIn := file("site"),
+    mdocVariables += "API_URL" -> "https://darkwingmcquack.github.io/pspsps/api/",
+    laikaIncludeAPI := true,
+    Compile / packageDoc / mappings := (unidocs / Compile / packageDoc / mappings).value,
+    laikaSite := {
+      val _ = laikaGenerateAPI.value
+      IO.copyDirectory(mdocOut.value, (laikaSite / target).value)
+      Set.empty
     },
-    laikaSite := laikaSite.dependsOn(siteApi).value,
-    tlSitePreview := tlSitePreview.dependsOn(siteApi).value
+    tlSiteKeepFiles := false,
+    tlSiteApiUrl := None,
+    libraryDependencies += "org.typelevel" %% "cats-effect" % catsEffectVersion
   )
-
-lazy val siteApi = taskKey[Unit]("Include unified Scaladoc in the microsite")
+  .dependsOn(all.jvm, laws.jvm)
+  .enablePlugins(TypelevelSitePlugin)
 
 lazy val unidocs = project
   .in(file("unidocs"))
@@ -230,12 +170,6 @@ lazy val unidocs = project
     crossScalaVersions := Seq("3.3.8"),
     ScalaUnidoc / unidoc / unidocProjectFilter :=
       inProjects(core.jvm, effect.jvm, streaming.jvm, all.jvm, laws.jvm),
-    ScalaUnidoc / unidoc / scalacOptions ++= Seq(
-      "-project-logo",
-      ((LocalRootProject / baseDirectory).value / "docs/src/main/mdoc/images/cat.svg").getAbsolutePath,
-      "-doc-root-content",
-      ((LocalRootProject / baseDirectory).value / "docs/src/main/scaladoc/index.md").getAbsolutePath
-    ),
     // Unpublished API URLs would otherwise replace links between these local source pages.
     ScalaUnidoc / unidoc / apiMappings ~= {
       _.filterNot { case (_, apiUrl) => apiUrl.getHost == "javadoc.invalid" }
@@ -243,7 +177,7 @@ lazy val unidocs = project
   )
 
 // Explicit module commands also work without the generated GitHub workflows.
-addCommandAlias("verifyJVM", ";+testsJVM/test;examples/compile;docs/tlSite")
+addCommandAlias("verifyJVM", ";+testsJVM/test;examples/compile;microsite/tlSite")
 addCommandAlias("verifyJS", ";+testsJS/test")
 addCommandAlias("verify", ";verifyJVM;verifyJS")
 addCommandAlias("fmt", ";+scalafmtAll;scalafmtSbt")

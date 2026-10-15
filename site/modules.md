@@ -78,4 +78,4 @@ For nested shapes, `asOptionTWrap` and `asEitherTWrap` explicitly select wrappin
 Cats' `toOptionT` and `toEitherT` explicitly select lifting an inner Option or
 Either. Use them when an overloaded short spelling would be ambiguous.
 
-Browse [API documentation](api.md) for all types and extension methods.
+Browse [API documentation](api-reference.md) for all types and extension methods.

@@ -185,4 +185,4 @@ val storedEffect: OptionT[IO, IO[Int]] =
 [Modules and imports](modules.md) covers dependency choices and focused syntax.
 [Conditional builders](conditionals.md) documents branch inference and evaluation.
 [Evaluation and resource safety](semantics.md) explains ownership and output shapes.
-[API documentation](api.md) contains the full Scaladoc.
+[API documentation](api-reference.md) contains the full Scaladoc.
