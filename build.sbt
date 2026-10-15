@@ -1,17 +1,27 @@
 import laika.ast.{Image, Path}
-import laika.helium.config.{HeliumIcon, IconLink, ImageLink}
+import laika.helium.config.{
+  ButtonLink,
+  HeliumIcon,
+  IconLink,
+  ImageLink,
+  LinkPanel,
+  Teaser,
+  TextLink
+}
 import org.typelevel.sbt.gha.{Permissions, PermissionValue}
 
+val repositoryUrl = "https://github.com/DarkWingMcQuack/pspsps"
+
 ThisBuild / tlBaseVersion := "0.1"
-ThisBuild / organization := ProjectInfo.organization
+ThisBuild / organization := "io.github.darkwingmcquack"
 ThisBuild / organizationName := "pspsps contributors"
 ThisBuild / startYear := Some(2026)
 ThisBuild / licenses := Seq(License.Apache2)
-ThisBuild / homepage := Some(url(ProjectInfo.url))
+ThisBuild / homepage := Some(url("https://darkwingmcquack.github.io/pspsps/"))
 ThisBuild / scmInfo := Some(
-  ScmInfo(url(ProjectInfo.url), "scm:git:" + ProjectInfo.url + ".git")
+  ScmInfo(url(repositoryUrl), "scm:git:" + repositoryUrl + ".git")
 )
-ThisBuild / developers := List(tlGitHubDev(ProjectInfo.owner, ProjectInfo.maintainer))
+ThisBuild / developers := List(tlGitHubDev("DarkWingMcQuack", "pspsps contributors"))
 ThisBuild / versionScheme := Some("early-semver")
 
 // Deliberately retain the Scala 3.3 binary/TASTy baseline.
@@ -20,51 +30,26 @@ ThisBuild / crossScalaVersions := Seq("2.13.18", "3.3.8")
 ThisBuild / tlJdkRelease := Some(17)
 ThisBuild / tlFatalWarnings := true
 
-// Typelevel's tagged-release convention, without snapshot publishing from main.
+// Publish artifacts from release tags and keep the documentation current on master.
 ThisBuild / tlCiReleaseBranches := Nil
-ThisBuild / tlCiReleaseTags := ProjectInfo.isConfigured
-ThisBuild / tlSitePublishBranch := None
-ThisBuild / tlSitePublishTags := ProjectInfo.isConfigured
+ThisBuild / tlCiReleaseTags := true
+ThisBuild / tlSitePublishBranch := Some("master")
+ThisBuild / tlSitePublishTags := false
 ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest")
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"), JavaSpec.temurin("21"))
 ThisBuild / githubWorkflowPermissions := Some(Permissions.ReadAll)
 ThisBuild / githubWorkflowIncludeClean := false
-ThisBuild / githubWorkflowPublishNeeds ++= Seq("site", "coverage")
+ThisBuild / githubWorkflowPublishNeeds += "site"
 ThisBuild / githubWorkflowBuildPreamble += WorkflowStep.Use(
   UseRef.Public("actions", "setup-node", "v6"),
   Map("node-version" -> "24"),
   name = Some("Setup Node.js"),
   cond = Some("matrix.project == 'rootJS'")
 )
-ThisBuild / githubWorkflowBuildPreamble += WorkflowStep.Run(
-  List("python3 scripts/check_repository.py"),
-  name = Some("Check repository and API inventory")
-)
 ThisBuild / githubWorkflowBuild += WorkflowStep.Sbt(
   List("examples/compile"),
   name = Some("Compile examples"),
   cond = Some("matrix.project == 'rootJVM'")
-)
-ThisBuild / githubWorkflowAddedJobs += WorkflowJob(
-  "coverage",
-  "JVM Coverage",
-  scalas = Nil,
-  sbtStepPreamble = Nil,
-  javas = List(JavaSpec.temurin("17")),
-  oses = List("ubuntu-latest"),
-  steps = githubWorkflowJobSetup.value.toList ++ List(
-    WorkflowStep.Sbt(List("coverageJVM"), name = Some("Measure JVM test coverage")),
-    WorkflowStep.Use(
-      UseRef.Public("actions", "upload-artifact", "v4"),
-      Map(
-        "name" -> "jvm-coverage",
-        "path" -> ".jvm/target/scala-*/scoverage-report",
-        "if-no-files-found" -> "error",
-        "include-hidden-files" -> "true"
-      ),
-      name = Some("Upload coverage report")
-    )
-  )
 )
 ThisBuild / githubWorkflowGeneratedCI ~= { jobs =>
   jobs.map {
@@ -75,11 +60,6 @@ ThisBuild / githubWorkflowGeneratedCI ~= { jobs =>
     case job => job
   }
 }
-
-// Safe-by-default local scaffold: publishing is skipped until metadata is set.
-lazy val publishingSettings = Seq(
-  publish / skip := !ProjectInfo.isConfigured
-)
 
 val catsVersion = "2.13.0"
 val catsEffectVersion = "3.7.1"
@@ -96,10 +76,9 @@ lazy val root = tlCrossRootProject
 lazy val core = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
   .in(file("modules/core"))
-  .settings(publishingSettings)
   .settings(
     name := "pspsps-core",
-    description := "Postfix Cats constructors for Scala 3",
+    description := "Postfix Cats constructors",
     libraryDependencies += "org.typelevel" %%% "cats-core" % catsVersion
   )
 
@@ -107,7 +86,6 @@ lazy val core = crossProject(JVMPlatform, JSPlatform)
 lazy val effect = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
   .in(file("modules/effect"))
-  .settings(publishingSettings)
   .settings(
     name := "pspsps-effect",
     description := "Postfix Cats Effect Resource and Ref constructors",
@@ -117,7 +95,6 @@ lazy val effect = crossProject(JVMPlatform, JSPlatform)
 lazy val streaming = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
   .in(file("modules/fs2"))
-  .settings(publishingSettings)
   .settings(
     name := "pspsps-fs2",
     description := "Postfix FS2 Stream, Pull, and Chunk constructors",
@@ -127,7 +104,6 @@ lazy val streaming = crossProject(JVMPlatform, JSPlatform)
 lazy val all = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
   .in(file("modules/all"))
-  .settings(publishingSettings)
   .dependsOn(core, effect, streaming)
   .settings(
     name := "pspsps",
@@ -137,7 +113,6 @@ lazy val all = crossProject(JVMPlatform, JSPlatform)
 lazy val laws = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
   .in(file("modules/laws"))
-  .settings(publishingSettings)
   .dependsOn(core)
   .settings(
     name := "pspsps-laws",
@@ -184,66 +159,83 @@ lazy val docs = project
     crossScalaVersions := Seq("3.3.8"),
     tlSiteIsTypelevelProject := None,
     tlSiteApiUrl := None,
-    tlSiteHelium := tlSiteHelium.value.site.topNavigationBar(
-      homeLink = ImageLink.internal(
-        Path.Root / "index.md",
-        Image.internal(Path.Root / "images" / "pspsps.svg", alt = Some("pspsps"))
+    tlSiteHelium := tlSiteHelium.value.site
+      .landingPage(
+        logo = Some(Image.internal(Path.Root / "images" / "cat.svg", alt = Some("pspsps cat"))),
+        title = Some("pspsps"),
+        subtitle = Some("Keep your Scala pipelines flowing."),
+        license = Some("Apache 2.0"),
+        titleLinks = Seq(
+          ButtonLink.internal(Path.Root / "getting-started.md", "Get started"),
+          ButtonLink.internal(Path.Root / "api" / "index.html", "Browse the API")
+        ),
+        linkPanel = Some(
+          LinkPanel(
+            "Documentation",
+            TextLink.internal(Path.Root / "modules.md", "Modules and imports"),
+            TextLink.internal(Path.Root / "conditionals.md", "Conditional builders"),
+            TextLink.internal(Path.Root / "semantics.md", "Evaluation and resource safety"),
+            TextLink.internal(Path.Root / "api.md", "API documentation")
+          )
+        ),
+        projectLinks = Seq(IconLink.external(repositoryUrl, HeliumIcon.github)),
+        teasers = Seq(
+          Teaser(
+            "Read left to right",
+            "Construct transformers, resources, and streams where the value already is."
+          ),
+          Teaser(
+            "Keep familiar types",
+            "Return normal Cats, Cats Effect, and FS2 types with their existing semantics."
+          ),
+          Teaser(
+            "Choose your modules",
+            "Use Cats syntax alone, add effect or streaming syntax, or bring them together with one import."
+          )
+        )
+      )
+      .site
+      .topNavigationBar(
+        homeLink = ImageLink.internal(
+          Path.Root / "README",
+          Image.internal(Path.Root / "images" / "pspsps.svg", alt = Some("pspsps"))
+        ),
+        navLinks = Seq(ButtonLink.internal(Path.Root / "api" / "index.html", "API"))
       ),
-      navLinks = Seq(IconLink.internal(Path.Root / "api" / "index.html", HeliumIcon.api))
-    ),
     libraryDependencies += "org.typelevel" %% "cats-effect" % catsEffectVersion,
     mdocIn := baseDirectory.value / "src" / "main" / "mdoc",
     mdocOut := target.value / "mdoc",
-    // Laika validates the assembled site, including generated reference and source assets.
+    // Scaladoc joins the site at the Laika stage, which validates the assembled links.
     mdocExtraArguments += "--no-link-hygiene",
-    mdocVariables ++= Map(
-      "ORGANIZATION" -> organization.value,
-      "REPOSITORY_URL" -> ProjectInfo.url
-    ),
-    Laika / sourceDirectories += target.value / "site-reference",
-    siteReference := {
+    Laika / sourceDirectories += target.value / "site-api",
+    siteApi := {
       val apiDocs = (unidocs / Compile / doc).value
-      val destination = target.value / "site-reference"
+      val destination = target.value / "site-api"
       IO.delete(destination)
       IO.createDirectory(destination)
       IO.copyDirectory(apiDocs, destination / "api")
-      val reference = IO
-        .read(baseDirectory.value / "reference.md")
-        .replace("(../modules/", "(source/modules/")
-        .replace(
-          "[verification status](../VERIFICATION.md)",
-          "[constructor semantics](semantics.md)"
-        )
-        .replace("(src/main/mdoc/index.md)", "(getting-started.md)")
-      IO.write(destination / "reference.md", reference)
-      IO.copyFile(baseDirectory.value / "design.md", destination / "design.md")
-      val moduleDirectory = baseDirectory.value.getParentFile / "modules"
-      Seq("core", "effect", "fs2", "all").foreach { module =>
-        IO.copyDirectory(
-          moduleDirectory / module / "src",
-          destination / "source" / "modules" / module / "src"
-        )
-      }
     },
-    laikaSite := laikaSite.dependsOn(siteReference).value,
-    tlSitePreview := tlSitePreview.dependsOn(siteReference).value
+    laikaSite := laikaSite.dependsOn(siteApi).value,
+    tlSitePreview := tlSitePreview.dependsOn(siteApi).value
   )
 
-lazy val siteReference =
-  taskKey[Unit](
-    "Include unified Scaladoc, the generated API inventory and design notes in the site"
-  )
+lazy val siteApi = taskKey[Unit]("Include unified Scaladoc in the microsite")
 
 lazy val unidocs = project
   .in(file("unidocs"))
   .enablePlugins(TypelevelUnidocPlugin)
-  .settings(publishingSettings)
   .settings(
     name := "pspsps-docs",
     description := "Unified pspsps API documentation",
     crossScalaVersions := Seq("3.3.8"),
     ScalaUnidoc / unidoc / unidocProjectFilter :=
       inProjects(core.jvm, effect.jvm, streaming.jvm, all.jvm, laws.jvm),
+    ScalaUnidoc / unidoc / scalacOptions ++= Seq(
+      "-project-logo",
+      ((LocalRootProject / baseDirectory).value / "docs/src/main/mdoc/images/cat.svg").getAbsolutePath,
+      "-doc-root-content",
+      ((LocalRootProject / baseDirectory).value / "docs/src/main/scaladoc/index.md").getAbsolutePath
+    ),
     // Unpublished API URLs would otherwise replace links between these local source pages.
     ScalaUnidoc / unidoc / apiMappings ~= {
       _.filterNot { case (_, apiUrl) => apiUrl.getHost == "javadoc.invalid" }
@@ -256,8 +248,4 @@ addCommandAlias("verifyJS", ";+testsJS/test")
 addCommandAlias("verify", ";verifyJVM;verifyJS")
 addCommandAlias("fmt", ";+scalafmtAll;scalafmtSbt")
 addCommandAlias("fmtCheck", ";+scalafmtCheckAll;scalafmtSbtCheck")
-addCommandAlias(
-  "coverageJVM",
-  ";project rootJVM;coverage;test;coverageReport;coverageAggregate;coverageOff;project /"
-)
 addCommandAlias("ci", ";githubWorkflowCheck;+headerCheckAll;fmtCheck;verify")

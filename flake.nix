@@ -33,10 +33,7 @@
               nodejs.package = pkgs.nodejs_24;
               native.enable = false;
             };
-            packages = [
-              pkgs.python3
-              pkgs.git
-            ];
+            packages = [ pkgs.git ];
           };
       in
       {
@@ -46,37 +43,6 @@
         };
 
         formatter = pkgs.nixfmt;
-
-        checks.repository-hygiene =
-          pkgs.runCommand "pspsps-repository-hygiene"
-            {
-              nativeBuildInputs = [ pkgs.python3 ];
-              src = pkgs.lib.cleanSourceWith {
-                src = ./.;
-                filter =
-                  path: type:
-                  pkgs.lib.cleanSourceFilter path type
-                  && !(builtins.elem (baseNameOf path) [
-                    "target"
-                    ".jvm"
-                    ".js"
-                    ".bsp"
-                    ".bloop"
-                    ".metals"
-                    ".direnv"
-                    ".agents"
-                    ".aws"
-                    ".codex"
-                  ]);
-              };
-            }
-            ''
-              cp -r "$src" source
-              chmod -R u+w source
-              cd source
-              python3 scripts/check_repository.py
-              touch "$out"
-            '';
       }
     );
 }

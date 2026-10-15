@@ -240,7 +240,3 @@ The explicit methods expose these minimal requirements:
 An effectful condition plus a pure branch generally means using a `Monad[F]`
 instance, which supplies both capabilities. The implementation requests them
 where used rather than imposing Sync or Monad on every entry point.
-
-The shared JVM/Scala.js suites cover the branch matrix, effect failure and
-cancellation, repeated execution, branch laziness, and compiler inference. See
-[laws and testing](laws.md) for the verification approach.

@@ -78,19 +78,4 @@ For nested shapes, `asOptionTWrap` and `asEitherTWrap` explicitly select wrappin
 Cats' `toOptionT` and `toEitherT` explicitly select lifting an inner Option or
 Either. Use them when an overloaded short spelling would be ambiguous.
 
-The [generated reference](reference.md) lists every receiver and signature.
-The site also embeds unified Scaladoc through the API icon in the top navigation.
-
-## Installation before the first release
-
-No version is published yet. For a local consumer, run `sbt publishLocal` and use
-the exact version reported by `show allJVM/version`.
-
-Once a release exists, JVM projects use `%%` and Scala.js projects use `%%%`:
-
-```scala
-libraryDependencies += "io.github.darkwingmcquack" %% "pspsps" % "YOUR_RELEASE"
-```
-
-Replace the release placeholder with an actual published version. Scala Native
-is outside the current support matrix.
+Browse [API documentation](api.md) for all types and extension methods.

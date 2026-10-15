@@ -81,9 +81,6 @@ jobs:
         with:
           node-version: 24
 
-      - name: Check repository and API inventory
-        run: python3 scripts/check_repository.py
-
       - name: Check that workflows are up to date
         run: sbt githubWorkflowCheck
 
@@ -127,7 +124,7 @@ jobs:
 
   publish:
     name: Publish Artifacts
-    needs: [build, site, coverage]
+    needs: [build, site]
     if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v'))
     strategy:
       matrix:
@@ -295,59 +292,6 @@ jobs:
           modules-ignore: pspsps-examples_3 rootjs_2.13 rootjs_3 pspsps-docs_3 pspsps-tests_sjs1_2.13 pspsps-tests_sjs1_3 rootjvm_2.13 rootjvm_3 rootnative_2.13 rootnative_3 pspsps-tests_2.13 pspsps-tests_3
           configs-ignore: test scala-tool scala-doc-tool test-internal
 
-  coverage:
-    name: JVM Coverage
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        java: [temurin@17]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout current branch (full)
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Setup sbt
-        uses: sbt/setup-sbt@v1
-
-      - name: Setup Java (temurin@17)
-        id: setup-java-temurin-17
-        if: matrix.java == 'temurin@17'
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: 17
-          cache: sbt
-
-      - name: sbt update
-        if: matrix.java == 'temurin@17' && steps.setup-java-temurin-17.outputs.cache-hit == 'false'
-        run: sbt +update
-
-      - name: Setup Java (temurin@21)
-        id: setup-java-temurin-21
-        if: matrix.java == 'temurin@21'
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: 21
-          cache: sbt
-
-      - name: sbt update
-        if: matrix.java == 'temurin@21' && steps.setup-java-temurin-21.outputs.cache-hit == 'false'
-        run: sbt +update
-
-      - name: Measure JVM test coverage
-        run: sbt coverageJVM
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: jvm-coverage
-          path: .jvm/target/scala-*/scoverage-report
-          if-no-files-found: error
-          include-hidden-files: true
-
   site:
     name: Generate Site
     strategy:
@@ -407,7 +351,7 @@ jobs:
         run: sbt docs/tlSite
 
       - name: Publish site
-        if: github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v')
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

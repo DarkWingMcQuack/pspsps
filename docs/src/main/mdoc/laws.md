@@ -1,4 +1,4 @@
-# Laws and testing
+# Laws
 
 pspsps is a syntax library. Its central law is **coherence with the
 constructor it names**: wrapping, lifting, mapping, and conditional selection
@@ -100,23 +100,5 @@ val optionalConditionalRules = ConditionalTests[Option].optionT[Int]
 val errorConditionalRules = ConditionalTests[ErrorOr].eitherT[String, Int]
 ```
 
-Register these using Discipline MUnit's `checkAll` in your test suite. The
-repository registers constructor and conditional rules for Option, List, and
-`Either[String, *]`. The conditional rules exercise arbitrary conditions and
-branches, including empty and failed outer effects. For another effect, provide
-the required Applicative or Monad, ScalaCheck Arbitrary, and Cats Eq instances
-for the representations under test.
-
-## Behavior beyond equality
-
-The shared JVM/Scala.js suites also cover every syntax family, positive and
-negative compiler contracts, staged conditional semantics, and effect lifecycle.
-Tests exercise release after success, failure, and cancellation, failed
-acquisition, branch laziness, and stream output.
-
-IO concurrency tests coordinate through `Deferred`. Timed-stream tests use
-Cats Effect `TestControl`. Observable execution behavior belongs in those
-suites, alongside pure coherence laws; constructing a Resource or IO value
-alone does not establish its lifecycle behavior.
-
-Run `sbt verifyJVM` or `sbt verifyJS` for each platform. `sbt verify` runs both.
+Register these using Discipline MUnit's `checkAll`. Provide Applicative or
+Monad, ScalaCheck Arbitrary, and Cats Eq instances for your effect.

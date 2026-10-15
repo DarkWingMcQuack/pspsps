@@ -1,11 +1,7 @@
 # Getting started
 
 Postfix constructors for Cats, Cats Effect, and FS2 in Scala 2.13 and Scala 3.
-An independent Typelevel-ecosystem library, not an official Typelevel project.
-
-The examples below are checked with `sbt docs/mdoc` as part of the JVM
-verification workflow. They use Scala 3 import syntax; Scala 2.13 uses `_`
-in place of `*` for wildcard imports. The constructed values are the same.
+Scala 2.13 uses `_` in place of `*` for wildcard imports.
 
 ## One import
 
@@ -27,8 +23,7 @@ val evaluated: Stream[IO, Int] = IO.pure(42).asStreamEval
 
 ## A complete pipeline
 
-The helper below deliberately accepts effectful callbacks. The library does not
-run them while constructing the returned stream.
+The IO actions execute when the stream runs.
 
 ```scala mdoc
 final case class Content(value: String)
@@ -125,11 +120,6 @@ val state = stateTransition.asStateT
 val initialRef = 0.asRef[IO]
 ```
 
-The library adds no new instances of Cats typeclasses. The conditional DSL
-has its own sealed branch-argument interpreter with pure/effectful instances. Continue to use Cats syntax for
-`pure`, `mapN`, `traverse`, `some`, `asRight`, `toValidatedNec`, and so on.
-
-
 ## Java nullable values
 
 Use `.nullable` at a Java API boundary to turn a null into None:
@@ -195,4 +185,4 @@ val storedEffect: OptionT[IO, IO[Int]] =
 [Modules and imports](modules.md) covers dependency choices and focused syntax.
 [Conditional builders](conditionals.md) documents branch inference and evaluation.
 [Evaluation and resource safety](semantics.md) explains ownership and output shapes.
-[API reference](reference.md) lists every extension signature.
+[API documentation](api.md) contains the full Scaladoc.
