@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Typelevel Laika + Helium Theme" />
+  <title>Getting started</title>
+  
+  <meta name="author" content="pspsps contributors"/>
+  
+  
+  <meta name="description" content="pspsps-docs"/>
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:500">
+  
+  <link rel="stylesheet" type="text/css" href="helium/site/icofont.min.css" />
+    <link rel="stylesheet" type="text/css" href="helium/site/laika-helium.css" />
+  <script src="helium/site/laika-helium.js"></script>
+  
+  
+  <script> /* for avoiding page load transitions */ </script>
+</head>
+
+  <body>
+
+    <header id="top-bar" class="light-default dark-default">
+
+  <div class="row">
+    <a id="nav-icon">
+      <i class="icofont-laika navigationMenu" title="Navigation">&#xefa2;</i>
+    </a>
+    
+    
+  </div>
+
+  <a class="image-link" href="index.html"><img src="images/pspsps.svg" alt="pspsps"></a>
+
+  <div class="row links">
+    
+    <a class="icon-link svg-link" href="https://github.com/DarkWingMcQuack/pspsps"><span class="github" title="Source Code"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+  <g class="svg-shape">
+    <path d="M49.995,1c-27.609,-0 -49.995,22.386 -49.995,50.002c-0,22.09 14.325,40.83 34.194,47.444c2.501,0.458 3.413,-1.086 3.413,-2.412c0,-1.185 -0.043,-4.331 -0.067,-8.503c-13.908,3.021 -16.843,-6.704 -16.843,-6.704c-2.274,-5.773 -5.552,-7.311 -5.552,-7.311c-4.54,-3.103 0.344,-3.042 0.344,-3.042c5.018,0.356 7.658,5.154 7.658,5.154c4.46,7.64 11.704,5.433 14.552,4.156c0.454,-3.232 1.744,-5.436 3.174,-6.685c-11.102,-1.262 -22.775,-5.553 -22.775,-24.713c-0,-5.457 1.949,-9.92 5.147,-13.416c-0.516,-1.265 -2.231,-6.348 0.488,-13.233c0,0 4.199,-1.344 13.751,5.126c3.988,-1.108 8.266,-1.663 12.518,-1.682c4.245,0.019 8.523,0.574 12.517,1.682c9.546,-6.47 13.736,-5.126 13.736,-5.126c2.728,6.885 1.013,11.968 0.497,13.233c3.204,3.496 5.141,7.959 5.141,13.416c0,19.209 -11.691,23.436 -22.83,24.673c1.795,1.544 3.394,4.595 3.394,9.26c0,6.682 -0.061,12.076 -0.061,13.715c0,1.338 0.899,2.894 3.438,2.406c19.853,-6.627 34.166,-25.354 34.166,-47.438c-0,-27.616 -22.389,-50.002 -50.005,-50.002"/>
+  </g>
+</svg></span></a>
+    
+    <a class="button-link" href="api/">API</a>
+    
+  </div>  
+
+</header>
+    
+    <nav id="sidebar">
+
+  <div class="row">
+    
+    <a class="icon-link svg-link" href="https://github.com/DarkWingMcQuack/pspsps"><span class="github" title="Source Code"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+  <g class="svg-shape">
+    <path d="M49.995,1c-27.609,-0 -49.995,22.386 -49.995,50.002c-0,22.09 14.325,40.83 34.194,47.444c2.501,0.458 3.413,-1.086 3.413,-2.412c0,-1.185 -0.043,-4.331 -0.067,-8.503c-13.908,3.021 -16.843,-6.704 -16.843,-6.704c-2.274,-5.773 -5.552,-7.311 -5.552,-7.311c-4.54,-3.103 0.344,-3.042 0.344,-3.042c5.018,0.356 7.658,5.154 7.658,5.154c4.46,7.64 11.704,5.433 14.552,4.156c0.454,-3.232 1.744,-5.436 3.174,-6.685c-11.102,-1.262 -22.775,-5.553 -22.775,-24.713c-0,-5.457 1.949,-9.92 5.147,-13.416c-0.516,-1.265 -2.231,-6.348 0.488,-13.233c0,0 4.199,-1.344 13.751,5.126c3.988,-1.108 8.266,-1.663 12.518,-1.682c4.245,0.019 8.523,0.574 12.517,1.682c9.546,-6.47 13.736,-5.126 13.736,-5.126c2.728,6.885 1.013,11.968 0.497,13.233c3.204,3.496 5.141,7.959 5.141,13.416c0,19.209 -11.691,23.436 -22.83,24.673c1.795,1.544 3.394,4.595 3.394,9.26c0,6.682 -0.061,12.076 -0.061,13.715c0,1.338 0.899,2.894 3.438,2.406c19.853,-6.627 34.166,-25.354 34.166,-47.438c-0,-27.616 -22.389,-50.002 -50.005,-50.002"/>
+  </g>
+</svg></span></a>
+    
+    <a class="button-link" href="api/">API</a>
+    
+  </div>
+
+  <ul class="nav-list">
+    <li class="level1 active nav-leaf"><a href="#">Getting started</a></li>
+    <li class="level1 nav-leaf"><a href="modules.html">Modules and imports</a></li>
+    <li class="level1 nav-leaf"><a href="conditionals.html">Conditional builders</a></li>
+    <li class="level1 nav-leaf"><a href="semantics.html">Evaluation and resource safety</a></li>
+    <li class="level1 nav-leaf"><a href="laws.html">Laws</a></li>
+    <li class="level1 nav-leaf"><a href="api.html">API documentation</a></li>
+  </ul>
+
+</nav>
+
+    <div id="container">
+
+      
+<nav id="page-nav">
+  <p class="header"><a href="#">Getting started</a></p>
+
+  <ul class="nav-list">
+    <li class="level1 nav-leaf"><a href="#one-import">One import</a></li>
+    <li class="level1 nav-leaf"><a href="#a-complete-pipeline">A complete pipeline</a></li>
+    <li class="level1 nav-leaf"><a href="#wrapping-lifting-and-pure-values-are-different">Wrapping, lifting, and pure values are different</a></li>
+    <li class="level1 nav-leaf"><a href="#collection-output-versus-singleton-output">Collection output versus singleton output</a></li>
+    <li class="level1 nav-leaf"><a href="#resource-ownership">Resource ownership</a></li>
+    <li class="level1 nav-leaf"><a href="#constructors-do-not-repair-an-eager-receiver">Constructors do not repair an eager receiver</a></li>
+    <li class="level1 nav-leaf"><a href="#focused-syntax-for-other-cats-types">Focused syntax for other Cats types</a></li>
+    <li class="level1 nav-leaf"><a href="#java-nullable-values">Java nullable values</a></li>
+    <li class="level1 nav-leaf"><a href="#conditional-values-and-effects">Conditional values and effects</a></li>
+    <li class="level1 nav-leaf"><a href="#continue-reading">Continue reading</a></li>
+  </ul>
+
+  <p class="footer"></p>
+</nav>
+
+
+      <main class="content">
+
+        <h1 id="getting-started" class="title">Getting started</h1>
+        <p>Postfix constructors for Cats, Cats Effect, and FS2 in Scala 2.13 and Scala 3.
+        Scala 2.13 uses <code>_</code> in place of <code>*</code> for wildcard imports.</p>
+        
+        <h2 id="one-import" class="section"><a class="anchor-link left" href="#one-import"><i class="icofont-laika link">&#xef71;</i></a>One import</h2>
+        <pre><code class="nohighlight"><span class="keyword">import</span><span> </span><span class="identifier">cats</span><span>.</span><span class="identifier">data</span><span>.{</span><span class="type-name">EitherT</span><span>, </span><span class="type-name">OptionT</span><span>}
+</span><span class="keyword">import</span><span> </span><span class="identifier">cats</span><span>.</span><span class="identifier">effect</span><span>.</span><span class="type-name">IO</span><span>
+</span><span class="keyword">import</span><span> </span><span class="identifier">cats</span><span>.</span><span class="identifier">instances</span><span>.</span><span class="identifier">list</span><span>.*
+</span><span class="keyword">import</span><span> </span><span class="identifier">cats</span><span>.</span><span class="identifier">syntax</span><span>.</span><span class="identifier">option</span><span>.*
+</span><span class="keyword">import</span><span> </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">syntax</span><span>.</span><span class="identifier">common</span><span>.*
+</span><span class="keyword">import</span><span> </span><span class="identifier">fs2</span><span>.</span><span class="type-name">Stream</span><span>
+
+</span><span class="keyword">val</span><span> </span><span class="identifier">input</span><span>: </span><span class="type-name">IO</span><span>[</span><span class="type-name">Option</span><span>[</span><span class="type-name">Int</span><span>]] = </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="type-name">Some</span><span>(</span><span class="number-literal">42</span><span>))
+</span><span class="comment">// input: IO[Option[Int]] = Pure(Some(42))
+</span><span class="keyword">val</span><span> </span><span class="identifier">wrapped</span><span>: </span><span class="type-name">OptionT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="identifier">input</span><span>.</span><span class="identifier">asOptionT</span><span>
+</span><span class="comment">// wrapped: OptionT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int] = OptionT(
+//   Pure(Some(42))
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">lifted</span><span>: </span><span class="type-name">OptionT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="type-name">Option</span><span>(</span><span class="number-literal">42</span><span>).</span><span class="identifier">asOptionT</span><span>[</span><span class="type-name">IO</span><span>]
+</span><span class="comment">// lifted: OptionT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int] = OptionT(
+//   Pure(Some(42))
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">plainEither</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="type-name">Right</span><span>(</span><span class="number-literal">42</span><span>)
+</span><span class="comment">// plainEither: Either[String, Int] = Right(42)
+</span><span class="keyword">val</span><span> </span><span class="identifier">either</span><span>: </span><span class="type-name">EitherT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="identifier">plainEither</span><span>.</span><span class="identifier">asEitherT</span><span>[</span><span class="type-name">IO</span><span>]
+</span><span class="comment">// either: EitherT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], String, Int] = EitherT(
+//   Pure(Right(42))
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">evaluated</span><span>: </span><span class="type-name">Stream</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="number-literal">42</span><span>).</span><span class="identifier">asStreamEval</span><span>
+</span><span class="comment">// evaluated: Stream[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int] = Stream(..)</span></code></pre>
+        
+        <h2 id="a-complete-pipeline" class="section"><a class="anchor-link left" href="#a-complete-pipeline"><i class="icofont-laika link">&#xef71;</i></a>A complete pipeline</h2>
+        <p>The IO actions execute when the stream runs.</p>
+        <pre><code class="nohighlight"><span class="keyword">final</span><span> </span><span class="keyword">case</span><span> </span><span class="keyword">class</span><span> </span><span class="type-name">Content</span><span>(</span><span class="identifier">value</span><span>: </span><span class="type-name">String</span><span>)
+
+</span><span class="keyword">def</span><span> </span><span class="declaration-name">update</span><span>(
+    </span><span class="identifier">key</span><span>: </span><span class="type-name">String</span><span>,
+    </span><span class="identifier">content</span><span>: </span><span class="type-name">Content</span><span>,
+    </span><span class="identifier">current</span><span>: (</span><span class="type-name">String</span><span>, </span><span class="type-name">Content</span><span>) =&gt; </span><span class="type-name">IO</span><span>[</span><span class="type-name">Option</span><span>[</span><span class="type-name">Content</span><span>]],
+    </span><span class="identifier">save</span><span>: </span><span class="type-name">Content</span><span> =&gt; </span><span class="type-name">IO</span><span>[</span><span class="type-name">Content</span><span>]
+): </span><span class="type-name">Stream</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Content</span><span>] =
+  </span><span class="identifier">current</span><span>(</span><span class="identifier">key</span><span>, </span><span class="identifier">content</span><span>)
+    .</span><span class="identifier">asOptionT</span><span>
+    .</span><span class="identifier">filter</span><span>(</span><span class="identifier">_</span><span>.</span><span class="identifier">value</span><span>.</span><span class="identifier">nonEmpty</span><span>)
+    .</span><span class="identifier">semiflatMap</span><span>(</span><span class="identifier">save</span><span>)
+    .</span><span class="identifier">value</span><span>
+    .</span><span class="identifier">asStreamEval</span><span>
+    .</span><span class="identifier">unNone</span><span>
+
+</span><span class="keyword">val</span><span> </span><span class="identifier">updates</span><span> = </span><span class="identifier">update</span><span>(
+  </span><span class="string-literal">&quot;key&quot;</span><span>,
+  </span><span class="type-name">Content</span><span>(</span><span class="string-literal">&quot;hello&quot;</span><span>),
+  (</span><span class="identifier">_</span><span>, </span><span class="identifier">content</span><span>) =&gt; </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="type-name">Some</span><span>(</span><span class="identifier">content</span><span>)),
+  </span><span class="identifier">content</span><span> =&gt; </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="identifier">content</span><span>)
+)
+</span><span class="comment">// updates: Stream[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Content] = Stream(..)</span></code></pre>
+        
+        <h2 id="wrapping-lifting-and-pure-values-are-different" class="section"><a class="anchor-link left" href="#wrapping-lifting-and-pure-values-are-different"><i class="icofont-laika link">&#xef71;</i></a>Wrapping, lifting, and pure values are different</h2>
+        <pre><code class="nohighlight"><span class="keyword">val</span><span> </span><span class="identifier">nested</span><span>: </span><span class="type-name">Option</span><span>[</span><span class="type-name">Option</span><span>[</span><span class="type-name">Int</span><span>]] = </span><span class="type-name">Some</span><span>(</span><span class="type-name">Some</span><span>(</span><span class="number-literal">42</span><span>))
+</span><span class="comment">// nested: Option[Option[Int]] = Some(Some(42))
+</span><span class="keyword">val</span><span> </span><span class="identifier">wrapNested</span><span>: </span><span class="type-name">OptionT</span><span>[</span><span class="type-name">Option</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="identifier">nested</span><span>.</span><span class="identifier">asOptionTWrap</span><span>
+</span><span class="comment">// wrapNested: OptionT[[A &gt;: Nothing &lt;: Any] =&gt; Option[A], Int] = OptionT(
+//   Some(Some(42))
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">liftNested</span><span>: </span><span class="type-name">OptionT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Option</span><span>[</span><span class="type-name">Int</span><span>]] = </span><span class="identifier">nested</span><span>.</span><span class="identifier">toOptionT</span><span>[</span><span class="type-name">IO</span><span>]
+</span><span class="comment">// liftNested: OptionT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Option[Int]] = OptionT(
+//   Pure(Some(Some(42)))
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">liftEffect</span><span>: </span><span class="type-name">EitherT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="number-literal">42</span><span>).</span><span class="identifier">asEitherTLiftF</span><span>[</span><span class="type-name">String</span><span>]
+</span><span class="comment">// liftEffect: EitherT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], String, Int] = EitherT(
+//   Map(
+//     ioe = Pure(42),
+//     f = cats.data.EitherT$RightPartiallyApplied$$$Lambda$13037/0x00007f0389fe0768@7e5f6829,
+//     event = cats.effect.tracing.TracingEvent$StackTrace
+//   )
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">pureValue</span><span>: </span><span class="type-name">EitherT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="number-literal">42</span><span>.</span><span class="identifier">asEitherTPure</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">String</span><span>]
+</span><span class="comment">// pureValue: EitherT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], String, Int] = EitherT(
+//   Pure(Right(42))
+// )
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">captureErrors</span><span>: </span><span class="type-name">EitherT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Throwable</span><span>, </span><span class="type-name">Int</span><span>] =
+  </span><span class="type-name">IO</span><span>.</span><span class="identifier">raiseError</span><span>[</span><span class="type-name">Int</span><span>](</span><span class="keyword">new</span><span> </span><span class="type-name">RuntimeException</span><span>(</span><span class="string-literal">&quot;example&quot;</span><span>))
+    .</span><span class="identifier">attempt</span><span>
+    .</span><span class="identifier">asEitherT</span><span>
+</span><span class="comment">// captureErrors: EitherT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Throwable, Int] = EitherT(
+//   Attempt(Error(java.lang.RuntimeException: example))
+// )</span></code></pre>
+        <p><code>asEitherTLiftF</code> sends successful effect results to <code>Right</code>. It does not catch
+        errors of the outer effect. <code>attempt.asEitherT</code> makes that policy explicit.</p>
+        
+        <h2 id="collection-output-versus-singleton-output" class="section"><a class="anchor-link left" href="#collection-output-versus-singleton-output"><i class="icofont-laika link">&#xef71;</i></a>Collection output versus singleton output</h2>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">val</span><span> </span><span class="identifier">oneCollection</span><span>: </span><span class="type-name">Stream</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">List</span><span>[</span><span class="type-name">Int</span><span>]] = </span><span class="type-name">List</span><span>(</span><span class="number-literal">1</span><span>, </span><span class="number-literal">2</span><span>, </span><span class="number-literal">3</span><span>).</span><span class="identifier">asStreamEmit</span><span>[</span><span class="type-name">IO</span><span>]
+</span><span class="comment">// oneCollection: Stream[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], List[Int]] = Stream(..)
+</span><span class="keyword">val</span><span> </span><span class="identifier">threeElements</span><span>: </span><span class="type-name">Stream</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="type-name">List</span><span>(</span><span class="number-literal">1</span><span>, </span><span class="number-literal">2</span><span>, </span><span class="number-literal">3</span><span>).</span><span class="identifier">asStreamEmits</span><span>[</span><span class="type-name">IO</span><span>]
+</span><span class="comment">// threeElements: Stream[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int] = Stream(..)
+</span><span class="keyword">val</span><span> </span><span class="identifier">evaluatedElements</span><span>: </span><span class="type-name">Stream</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="type-name">List</span><span>(</span><span class="number-literal">1</span><span>, </span><span class="number-literal">2</span><span>, </span><span class="number-literal">3</span><span>)).</span><span class="identifier">asStreamEvals</span><span>
+</span><span class="comment">// evaluatedElements: Stream[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int] = Stream(..)
+</span><span class="keyword">val</span><span> </span><span class="identifier">noElements</span><span>: </span><span class="type-name">Stream</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Nothing</span><span>] = </span><span class="type-name">IO</span><span>.</span><span class="identifier">unit</span><span>.</span><span class="identifier">asStreamExec</span><span>
+</span><span class="comment">// noElements: Stream[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Nothing] = Stream(..)</span></code></pre>
+        <p><code>asStreamEmits</code> and <code>asStreamEvals</code> are for finite collections.
+        <code>asStreamEvals</code> follows FS2&#39;s conversion of the Foldable to a List.
+        Neither method promises streaming traversal of an infinite collection.</p>
+        
+        <h2 id="resource-ownership" class="section"><a class="anchor-link left" href="#resource-ownership"><i class="icofont-laika link">&#xef71;</i></a>Resource ownership</h2>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">val</span><span> </span><span class="identifier">acquire</span><span>: </span><span class="type-name">IO</span><span>[</span><span class="type-name">String</span><span>] = </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="string-literal">&quot;connection&quot;</span><span>)
+</span><span class="comment">// acquire: IO[String] = Pure(&quot;connection&quot;)
+</span><span class="keyword">val</span><span> </span><span class="identifier">release</span><span>: </span><span class="type-name">String</span><span> =&gt; </span><span class="type-name">IO</span><span>[</span><span class="type-name">Unit</span><span>] = </span><span class="identifier">_</span><span> =&gt; </span><span class="type-name">IO</span><span>.</span><span class="identifier">unit</span><span>
+</span><span class="comment">// release: Function1[String, IO[Unit]] = repl.MdocSession$MdocApp$$Lambda$13042/0x00007f0389fe4aa0@77bfe986
+</span><span class="keyword">val</span><span> </span><span class="identifier">scoped</span><span> = </span><span class="identifier">acquire</span><span>.</span><span class="identifier">asResourceMake</span><span>(</span><span class="identifier">release</span><span>).</span><span class="identifier">asStreamResource</span><span>
+</span><span class="comment">// scoped: Stream[IO, String] = Stream(..)
+</span><span class="keyword">val</span><span> </span><span class="identifier">unowned</span><span> = </span><span class="identifier">acquire</span><span>.</span><span class="identifier">asResourceEval</span><span>
+</span><span class="comment">// unowned: Resource[IO, String] = Eval(Pure(&quot;connection&quot;))</span></code></pre>
+        <p><code>asResourceEval</code> evaluates acquisition without registering cleanup.
+        <code>asResourceMake</code> pairs acquisition with a release action.</p>
+        <p>Do not put an already-acquired handle into <code>asResourcePure</code> expecting it to be
+        closed. Use <code>IO.blocking(openHandle()).asResourceAutoCloseable</code> for an
+        AutoCloseable acquired by blocking code.</p>
+        
+        <h2 id="constructors-do-not-repair-an-eager-receiver" class="section"><a class="anchor-link left" href="#constructors-do-not-repair-an-eager-receiver"><i class="icofont-laika link">&#xef71;</i></a>Constructors do not repair an eager receiver</h2>
+        <p>Scala evaluates an ordinary receiver expression before calling its extension.
+        <code>IO.pure(openHandle())</code> has already opened the handle; later syntax cannot undo
+        that. Suspend with <code>IO.delay</code> or <code>IO.blocking</code> at the original effect boundary.
+        Already-running effects such as Future do not become lazy through this library.</p>
+        
+        <h2 id="focused-syntax-for-other-cats-types" class="section"><a class="anchor-link left" href="#focused-syntax-for-other-cats-types"><i class="icofont-laika link">&#xef71;</i></a>Focused syntax for other Cats types</h2>
+        <p>The curated <code>common</code> import keeps these specialized families opt-in:</p>
+        <pre><code class="nohighlight"><span class="keyword">import</span><span> </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">syntax</span><span>.</span><span class="identifier">kleisli</span><span>.*
+</span><span class="keyword">import</span><span> </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">syntax</span><span>.</span><span class="identifier">writerT</span><span>.*
+</span><span class="keyword">import</span><span> </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">syntax</span><span>.</span><span class="identifier">stateT</span><span>.*
+</span><span class="keyword">val</span><span> </span><span class="identifier">readLength</span><span>: </span><span class="type-name">String</span><span> =&gt; </span><span class="type-name">IO</span><span>[</span><span class="type-name">Int</span><span>] = </span><span class="identifier">key</span><span> =&gt; </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="identifier">key</span><span>.</span><span class="identifier">length</span><span>)
+</span><span class="comment">// readLength: Function1[String, IO[Int]] = repl.MdocSession$MdocApp$$Lambda$13050/0x00007f0389fe54d0@710d060c
+</span><span class="keyword">val</span><span> </span><span class="identifier">lookup</span><span> = </span><span class="identifier">readLength</span><span>.</span><span class="identifier">asKleisli</span><span>
+</span><span class="comment">// lookup: Kleisli[IO, String, Int] = Kleisli(
+//   repl.MdocSession$MdocApp$$Lambda$13050/0x00007f0389fe54d0@710d060c
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">logAndResult</span><span> = (</span><span class="type-name">List</span><span>(</span><span class="string-literal">&quot;read&quot;</span><span>), </span><span class="number-literal">42</span><span>).</span><span class="identifier">asWriterTFromTuple</span><span>[</span><span class="type-name">IO</span><span>]
+</span><span class="comment">// logAndResult: WriterT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], List[String], Int] = WriterT(
+//   Pure((List(&quot;read&quot;), 42))
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">stateTransition</span><span>: </span><span class="type-name">Int</span><span> =&gt; </span><span class="type-name">IO</span><span>[(</span><span class="type-name">Int</span><span>, </span><span class="type-name">String</span><span>)] = </span><span class="identifier">n</span><span> =&gt; </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>((</span><span class="identifier">n</span><span> + </span><span class="number-literal">1</span><span>, </span><span class="identifier">n</span><span>.</span><span class="identifier">toString</span><span>))
+</span><span class="comment">// stateTransition: Function1[Int, IO[Tuple2[Int, String]]] = repl.MdocSession$MdocApp$$Lambda$13051/0x00007f038a020000@44390ee9
+</span><span class="keyword">val</span><span> </span><span class="identifier">state</span><span> = </span><span class="identifier">stateTransition</span><span>.</span><span class="identifier">asStateT</span><span>
+</span><span class="comment">// state: IndexedStateT[IO, Int, Int, String] = cats.data.IndexedStateT@7516bff5
+</span><span class="keyword">val</span><span> </span><span class="identifier">initialRef</span><span> = </span><span class="number-literal">0</span><span>.</span><span class="identifier">asRef</span><span>[</span><span class="type-name">IO</span><span>]
+</span><span class="comment">// initialRef: IO[Ref[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int]] = Delay(
+//   thunk = cats.effect.IO$$$Lambda$13052/0x00007f038a01e850@791a924d,
+//   event = cats.effect.tracing.TracingEvent$StackTrace
+// )</span></code></pre>
+        
+        <h2 id="java-nullable-values" class="section"><a class="anchor-link left" href="#java-nullable-values"><i class="icofont-laika link">&#xef71;</i></a>Java nullable values</h2>
+        <p>Use <code>.nullable</code> at a Java API boundary to turn a null into None:</p>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">val</span><span> </span><span class="identifier">javaValues</span><span> = </span><span class="keyword">new</span><span> </span><span class="identifier">java</span><span>.</span><span class="identifier">util</span><span>.</span><span class="type-name">HashMap</span><span>[</span><span class="type-name">String</span><span>, </span><span class="type-name">String</span><span>]()
+</span><span class="comment">// javaValues: HashMap[String, String] = {present=hello}
+</span><span class="identifier">javaValues</span><span>.</span><span class="identifier">put</span><span>(</span><span class="string-literal">&quot;present&quot;</span><span>, </span><span class="string-literal">&quot;hello&quot;</span><span>)
+</span><span class="comment">// res0: String = null
+</span><span class="keyword">val</span><span> </span><span class="identifier">absent</span><span> = </span><span class="identifier">javaValues</span><span>.</span><span class="identifier">get</span><span>(</span><span class="string-literal">&quot;missing&quot;</span><span>).</span><span class="identifier">nullable</span><span>
+</span><span class="comment">// absent: Option[String] = None
+</span><span class="keyword">val</span><span> </span><span class="identifier">present</span><span> = </span><span class="identifier">javaValues</span><span>.</span><span class="identifier">get</span><span>(</span><span class="string-literal">&quot;present&quot;</span><span>).</span><span class="identifier">nullable</span><span>
+</span><span class="comment">// present: Option[String] = Some(&quot;hello&quot;)</span></code></pre>
+        <p>The results are <code>None</code> and <code>Some(&quot;hello&quot;)</code>. This helper is available through
+        <code>common</code>, <code>core</code>, <code>all</code>, or the focused <code>pspsps.syntax.nullable.*</code> import.
+        It accepts reference types, including boxed Java values, and excludes Scala primitives.</p>
+        
+        <h2 id="conditional-values-and-effects" class="section"><a class="anchor-link left" href="#conditional-values-and-effects"><i class="icofont-laika link">&#xef71;</i></a>Conditional values and effects</h2>
+        <p>Use the factory namespaces fully qualified alongside the normal Scala and Cats
+        companion imports:</p>
+        <pre><code class="nohighlight"><span class="keyword">val</span><span> </span><span class="identifier">conditionalEither</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] =
+  </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">builders</span><span>.</span><span class="type-name">Either</span><span>.</span><span class="identifier">cond</span><span>(</span><span class="boolean-literal">true</span><span>).</span><span class="identifier">withLeft</span><span>(</span><span class="string-literal">&quot;missing&quot;</span><span>).</span><span class="identifier">withRight</span><span>(</span><span class="number-literal">42</span><span>)
+</span><span class="comment">// conditionalEither: Either[String, Int] = Right(42)
+</span><span class="keyword">val</span><span> </span><span class="identifier">conditionalOption</span><span>: </span><span class="type-name">Option</span><span>[</span><span class="type-name">Int</span><span>] =
+  </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">builders</span><span>.</span><span class="type-name">Option</span><span>.</span><span class="identifier">cond</span><span>(</span><span class="boolean-literal">true</span><span>).</span><span class="identifier">withSome</span><span>(</span><span class="number-literal">42</span><span>)
+</span><span class="comment">// conditionalOption: Option[Int] = Some(42)
+</span><span class="keyword">val</span><span> </span><span class="identifier">conditionalEitherT</span><span>: </span><span class="type-name">EitherT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] =
+  </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">builders</span><span>.</span><span class="type-name">EitherT</span><span>.</span><span class="identifier">cond</span><span>(</span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="boolean-literal">true</span><span>)).</span><span class="identifier">withLeft</span><span>(</span><span class="string-literal">&quot;missing&quot;</span><span>).</span><span class="identifier">withRight</span><span>(</span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="number-literal">42</span><span>))
+</span><span class="comment">// conditionalEitherT: EitherT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], String, Int] = EitherT(
+//   FlatMap(
+//     ioe = Pure(true),
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12515/0x00007f0389f0e068@121fbc59,
+//     event = cats.effect.tracing.TracingEvent$StackTrace
+//   )
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">conditionalOptionT</span><span>: </span><span class="type-name">OptionT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Int</span><span>] =
+  </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">builders</span><span>.</span><span class="type-name">OptionT</span><span>.</span><span class="identifier">cond</span><span>(</span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="boolean-literal">true</span><span>)).</span><span class="identifier">withSome</span><span>(</span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="number-literal">42</span><span>))
+</span><span class="comment">// conditionalOptionT: OptionT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int] = OptionT(
+//   FlatMap(
+//     ioe = Pure(true),
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12515/0x00007f0389f0e068@62f2e80a,
+//     event = cats.effect.tracing.TracingEvent$StackTrace
+//   )
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">conditionalPureTest</span><span>: </span><span class="type-name">EitherT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] =
+  </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">builders</span><span>.</span><span class="type-name">EitherT</span><span>.</span><span class="identifier">cond</span><span>[</span><span class="type-name">IO</span><span>](</span><span class="boolean-literal">true</span><span>).</span><span class="identifier">withRight</span><span>(</span><span class="number-literal">42</span><span>).</span><span class="identifier">withLeft</span><span>(</span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="string-literal">&quot;missing&quot;</span><span>))
+</span><span class="comment">// conditionalPureTest: EitherT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], String, Int] = EitherT(
+//   Map(
+//     ioe = Pure(42),
+//     f = pspsps.builders.EitherWithRight$$Lambda$13065/0x00007f038a01f820@f844304,
+//     event = cats.effect.tracing.TracingEvent$StackTrace
+//   )
+// )
+</span><span>
+</span><span class="identifier">assert</span><span>(</span><span class="identifier">conditionalEither</span><span> == </span><span class="type-name">Right</span><span>(</span><span class="number-literal">42</span><span>))
+</span><span class="identifier">assert</span><span>(</span><span class="identifier">conditionalOption</span><span> == </span><span class="type-name">Some</span><span>(</span><span class="number-literal">42</span><span>))
+</span><span class="identifier">assert</span><span>(</span><span class="identifier">pspsps</span><span>.</span><span class="identifier">builders</span><span>.</span><span class="type-name">Option</span><span>.</span><span class="identifier">cond</span><span>(</span><span class="boolean-literal">false</span><span>).</span><span class="identifier">withSome</span><span>[</span><span class="type-name">Int</span><span>](</span><span class="identifier">sys</span><span>.</span><span class="identifier">error</span><span>(</span><span class="string-literal">&quot;unselected&quot;</span><span>)) == </span><span class="type-name">None</span><span>)</span></code></pre>
+        <p>The postfix spelling needs only the normal syntax import:</p>
+        <pre><code class="nohighlight"><span class="keyword">val</span><span> </span><span class="identifier">postfixEither</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] =
+  </span><span class="boolean-literal">true</span><span>.</span><span class="identifier">asEitherCond</span><span>.</span><span class="identifier">withLeft</span><span>(</span><span class="string-literal">&quot;missing&quot;</span><span>).</span><span class="identifier">withRight</span><span>(</span><span class="number-literal">42</span><span>)
+</span><span class="comment">// postfixEither: Either[String, Int] = Right(42)
+</span><span class="keyword">val</span><span> </span><span class="identifier">postfixOption</span><span>: </span><span class="type-name">Option</span><span>[</span><span class="type-name">Int</span><span>] =
+  </span><span class="boolean-literal">true</span><span>.</span><span class="identifier">asOptionCond</span><span>.</span><span class="identifier">withSome</span><span>(</span><span class="number-literal">42</span><span>)
+</span><span class="comment">// postfixOption: Option[Int] = Some(42)
+</span><span class="keyword">val</span><span> </span><span class="identifier">postfixEitherT</span><span>: </span><span class="type-name">EitherT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] =
+  </span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="boolean-literal">true</span><span>).</span><span class="identifier">asEitherTCond</span><span>.</span><span class="identifier">withLeft</span><span>(</span><span class="string-literal">&quot;missing&quot;</span><span>).</span><span class="identifier">withRight</span><span>(</span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="number-literal">42</span><span>))
+</span><span class="comment">// postfixEitherT: EitherT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], String, Int] = EitherT(
+//   FlatMap(
+//     ioe = Pure(true),
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12515/0x00007f0389f0e068@22212043,
+//     event = cats.effect.tracing.TracingEvent$StackTrace
+//   )
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">postfixOptionT</span><span>: </span><span class="type-name">OptionT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Int</span><span>] =
+  </span><span class="boolean-literal">true</span><span>.</span><span class="identifier">asOptionTCond</span><span>[</span><span class="type-name">IO</span><span>].</span><span class="identifier">withSome</span><span>(</span><span class="number-literal">42</span><span>)
+</span><span class="comment">// postfixOptionT: OptionT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int] = OptionT(
+//   Map(
+//     ioe = Pure(42),
+//     f = pspsps.builders.OptionCondition$$Lambda$12524/0x00007f0389f0afe0@386cea32,
+//     event = cats.effect.tracing.TracingEvent$StackTrace
+//   )
+// )</span></code></pre>
+        <p>Only the selected branch is evaluated. A Boolean condition selects at builder
+        completion; an <code>IO[Boolean]</code> condition selects inside IO execution. Plain
+        Option/Either do not run effects: use OptionT/EitherT for an effectful condition.
+        An explicitly pure transformer branch can retain an effect as the payload:</p>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">val</span><span> </span><span class="identifier">storedEffect</span><span>: </span><span class="type-name">OptionT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">IO</span><span>[</span><span class="type-name">Int</span><span>]] =
+  </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">builders</span><span>.</span><span class="type-name">OptionT</span><span>.</span><span class="identifier">condPure</span><span>[</span><span class="type-name">IO</span><span>](</span><span class="boolean-literal">true</span><span>).</span><span class="identifier">withSomePure</span><span>(</span><span class="type-name">IO</span><span>.</span><span class="identifier">pure</span><span>(</span><span class="number-literal">42</span><span>))
+</span><span class="comment">// storedEffect: OptionT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], IO[Int]] = OptionT(
+//   Map(
+//     ioe = Pure(Pure(42)),
+//     f = pspsps.builders.OptionCondition$$Lambda$12524/0x00007f0389f0afe0@386cea32,
+//     event = cats.effect.tracing.TracingEvent$StackTrace
+//   )
+// )</span></code></pre>
+        
+        <h2 id="continue-reading" class="section"><a class="anchor-link left" href="#continue-reading"><i class="icofont-laika link">&#xef71;</i></a>Continue reading</h2>
+        <p><a href="modules.html">Modules and imports</a> covers dependency choices and focused syntax.
+        <a href="conditionals.html">Conditional builders</a> documents branch inference and evaluation.
+        <a href="semantics.html">Evaluation and resource safety</a> explains ownership and output shapes.
+        <a href="api.html">API documentation</a> contains the full Scaladoc.</p>
+
+        
+<hr class="footer-rule"/>
+<footer>
+  Site generated by <a href="https://typelevel.org/Laika/">Laika</a> with the Helium theme.
+</footer>
+
+
+      </main>
+
+    </div>
+
+  </body>
+
+</html>

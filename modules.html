@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Typelevel Laika + Helium Theme" />
+  <title>Modules and imports</title>
+  
+  <meta name="author" content="pspsps contributors"/>
+  
+  
+  <meta name="description" content="pspsps-docs"/>
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:500">
+  
+  <link rel="stylesheet" type="text/css" href="helium/site/icofont.min.css" />
+    <link rel="stylesheet" type="text/css" href="helium/site/laika-helium.css" />
+  <script src="helium/site/laika-helium.js"></script>
+  
+  
+  <script> /* for avoiding page load transitions */ </script>
+</head>
+
+  <body>
+
+    <header id="top-bar" class="light-default dark-default">
+
+  <div class="row">
+    <a id="nav-icon">
+      <i class="icofont-laika navigationMenu" title="Navigation">&#xefa2;</i>
+    </a>
+    
+    
+  </div>
+
+  <a class="image-link" href="index.html"><img src="images/pspsps.svg" alt="pspsps"></a>
+
+  <div class="row links">
+    
+    <a class="icon-link svg-link" href="https://github.com/DarkWingMcQuack/pspsps"><span class="github" title="Source Code"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+  <g class="svg-shape">
+    <path d="M49.995,1c-27.609,-0 -49.995,22.386 -49.995,50.002c-0,22.09 14.325,40.83 34.194,47.444c2.501,0.458 3.413,-1.086 3.413,-2.412c0,-1.185 -0.043,-4.331 -0.067,-8.503c-13.908,3.021 -16.843,-6.704 -16.843,-6.704c-2.274,-5.773 -5.552,-7.311 -5.552,-7.311c-4.54,-3.103 0.344,-3.042 0.344,-3.042c5.018,0.356 7.658,5.154 7.658,5.154c4.46,7.64 11.704,5.433 14.552,4.156c0.454,-3.232 1.744,-5.436 3.174,-6.685c-11.102,-1.262 -22.775,-5.553 -22.775,-24.713c-0,-5.457 1.949,-9.92 5.147,-13.416c-0.516,-1.265 -2.231,-6.348 0.488,-13.233c0,0 4.199,-1.344 13.751,5.126c3.988,-1.108 8.266,-1.663 12.518,-1.682c4.245,0.019 8.523,0.574 12.517,1.682c9.546,-6.47 13.736,-5.126 13.736,-5.126c2.728,6.885 1.013,11.968 0.497,13.233c3.204,3.496 5.141,7.959 5.141,13.416c0,19.209 -11.691,23.436 -22.83,24.673c1.795,1.544 3.394,4.595 3.394,9.26c0,6.682 -0.061,12.076 -0.061,13.715c0,1.338 0.899,2.894 3.438,2.406c19.853,-6.627 34.166,-25.354 34.166,-47.438c-0,-27.616 -22.389,-50.002 -50.005,-50.002"/>
+  </g>
+</svg></span></a>
+    
+    <a class="button-link" href="api/">API</a>
+    
+  </div>  
+
+</header>
+    
+    <nav id="sidebar">
+
+  <div class="row">
+    
+    <a class="icon-link svg-link" href="https://github.com/DarkWingMcQuack/pspsps"><span class="github" title="Source Code"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+  <g class="svg-shape">
+    <path d="M49.995,1c-27.609,-0 -49.995,22.386 -49.995,50.002c-0,22.09 14.325,40.83 34.194,47.444c2.501,0.458 3.413,-1.086 3.413,-2.412c0,-1.185 -0.043,-4.331 -0.067,-8.503c-13.908,3.021 -16.843,-6.704 -16.843,-6.704c-2.274,-5.773 -5.552,-7.311 -5.552,-7.311c-4.54,-3.103 0.344,-3.042 0.344,-3.042c5.018,0.356 7.658,5.154 7.658,5.154c4.46,7.64 11.704,5.433 14.552,4.156c0.454,-3.232 1.744,-5.436 3.174,-6.685c-11.102,-1.262 -22.775,-5.553 -22.775,-24.713c-0,-5.457 1.949,-9.92 5.147,-13.416c-0.516,-1.265 -2.231,-6.348 0.488,-13.233c0,0 4.199,-1.344 13.751,5.126c3.988,-1.108 8.266,-1.663 12.518,-1.682c4.245,0.019 8.523,0.574 12.517,1.682c9.546,-6.47 13.736,-5.126 13.736,-5.126c2.728,6.885 1.013,11.968 0.497,13.233c3.204,3.496 5.141,7.959 5.141,13.416c0,19.209 -11.691,23.436 -22.83,24.673c1.795,1.544 3.394,4.595 3.394,9.26c0,6.682 -0.061,12.076 -0.061,13.715c0,1.338 0.899,2.894 3.438,2.406c19.853,-6.627 34.166,-25.354 34.166,-47.438c-0,-27.616 -22.389,-50.002 -50.005,-50.002"/>
+  </g>
+</svg></span></a>
+    
+    <a class="button-link" href="api/">API</a>
+    
+  </div>
+
+  <ul class="nav-list">
+    <li class="level1 nav-leaf"><a href="getting-started.html">Getting started</a></li>
+    <li class="level1 active nav-leaf"><a href="#">Modules and imports</a></li>
+    <li class="level1 nav-leaf"><a href="conditionals.html">Conditional builders</a></li>
+    <li class="level1 nav-leaf"><a href="semantics.html">Evaluation and resource safety</a></li>
+    <li class="level1 nav-leaf"><a href="laws.html">Laws</a></li>
+    <li class="level1 nav-leaf"><a href="api.html">API documentation</a></li>
+  </ul>
+
+</nav>
+
+    <div id="container">
+
+      
+<nav id="page-nav">
+  <p class="header"><a href="#">Modules and imports</a></p>
+
+  <ul class="nav-list">
+    <li class="level1 nav-leaf"><a href="#curated-or-complete">Curated or complete</a></li>
+    <li class="level1 nav-leaf"><a href="#focused-imports">Focused imports</a></li>
+    <li class="level1 nav-leaf"><a href="#naming-and-nested-shapes">Naming and nested shapes</a></li>
+  </ul>
+
+  <p class="footer"></p>
+</nav>
+
+
+      <main class="content">
+
+        <h1 id="modules-and-imports" class="title">Modules and imports</h1>
+        <p>Start with the umbrella artifact and <code>pspsps.syntax.common.*</code> for everyday
+        pipelines. Use individual modules for a smaller dependency footprint.
+        All library modules cross-compile for Scala 2.13 and Scala 3, on JVM and Scala.js.
+        The examples here use Scala 3 imports; Scala 2.13 replaces <code>*</code> with <code>_</code>.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Artifact</th>
+              <th>Aggregate import</th>
+              <th>Direct dependency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>pspsps-core</code></td>
+              <td><code>pspsps.syntax.core.*</code></td>
+              <td>Cats Core</td>
+            </tr>
+            <tr>
+              <td><code>pspsps-effect</code></td>
+              <td><code>pspsps.syntax.effect.*</code></td>
+              <td>Cats Effect Kernel</td>
+            </tr>
+            <tr>
+              <td><code>pspsps-fs2</code></td>
+              <td><code>pspsps.syntax.streaming.*</code></td>
+              <td>FS2 Core</td>
+            </tr>
+            <tr>
+              <td><code>pspsps</code></td>
+              <td><code>pspsps.syntax.common.*</code> or <code>all.*</code></td>
+              <td>Core, effect, and FS2 syntax</td>
+            </tr>
+            <tr>
+              <td><code>pspsps-laws</code></td>
+              <td><code>pspsps.laws.discipline</code></td>
+              <td>Core and law-testing libraries</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>The three syntax modules are independent. FS2&#39;s normal transitive dependencies
+        still include Cats and Cats Effect. Both <code>common</code> and <code>all</code> live in the umbrella
+        artifact.</p>
+        
+        <h2 id="curated-or-complete" class="section"><a class="anchor-link left" href="#curated-or-complete"><i class="icofont-laika link">&#xef71;</i></a>Curated or complete</h2>
+        <p><code>common</code> includes OptionT, EitherT, conditional builders, basic Resource
+        construction, Ref, Stream, Chunk, and <code>.nullable</code>. It is the recommended starting
+        import for application code.</p>
+        <p><code>all</code> includes the complete syntax surface: common plus IorT, WriterT,
+        Reader/Kleisli/Cokleisli, State/StateT, Pull, Resource interop, and advanced
+        Resource acquisition. You can also combine common with focused specialized
+        imports.</p>
+        
+        <h2 id="focused-imports" class="section"><a class="anchor-link left" href="#focused-imports"><i class="icofont-laika link">&#xef71;</i></a>Focused imports</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Family</th>
+              <th>Import</th>
+              <th>Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OptionT</td>
+              <td><code>pspsps.syntax.optionT.*</code></td>
+              <td><code>asOptionTWrap</code>, <code>asOptionTLiftF</code></td>
+            </tr>
+            <tr>
+              <td>EitherT</td>
+              <td><code>pspsps.syntax.eitherT.*</code></td>
+              <td><code>asEitherTWrap</code>, <code>asEitherTLiftF</code></td>
+            </tr>
+            <tr>
+              <td>Conditional builders</td>
+              <td><code>pspsps.syntax.conditional.*</code></td>
+              <td><code>asEitherCond</code>, <code>asOptionTCond</code></td>
+            </tr>
+            <tr>
+              <td>Nullable Java values</td>
+              <td><code>pspsps.syntax.nullable.*</code></td>
+              <td><code>nullable</code></td>
+            </tr>
+            <tr>
+              <td>IorT</td>
+              <td><code>pspsps.syntax.iorT.*</code></td>
+              <td><code>asIorT</code>, <code>asIorTLiftF</code></td>
+            </tr>
+            <tr>
+              <td>Writer / WriterT</td>
+              <td><code>pspsps.syntax.writerT.*</code></td>
+              <td><code>asWriterT</code>, <code>asWriterTFromTuple</code></td>
+            </tr>
+            <tr>
+              <td>Reader / Kleisli / Cokleisli</td>
+              <td><code>pspsps.syntax.kleisli.*</code></td>
+              <td><code>asKleisli</code>, <code>asReader</code></td>
+            </tr>
+            <tr>
+              <td>State / StateT</td>
+              <td><code>pspsps.syntax.stateT.*</code></td>
+              <td><code>asStateT</code>, <code>asIndexedStateT</code></td>
+            </tr>
+            <tr>
+              <td>Complete Resource family</td>
+              <td><code>pspsps.syntax.resource.*</code></td>
+              <td>Basic, interop, and advanced constructors</td>
+            </tr>
+            <tr>
+              <td>Resource interop</td>
+              <td><code>pspsps.syntax.resourceInterop.*</code></td>
+              <td><code>asResourceWrap</code>, <code>asResourceWrapCase</code></td>
+            </tr>
+            <tr>
+              <td>Advanced Resource acquisition</td>
+              <td><code>pspsps.syntax.resourceAdvanced.*</code></td>
+              <td><code>asResourceMakeFull</code>, <code>asResourceMakeCaseFull</code></td>
+            </tr>
+            <tr>
+              <td>Ref</td>
+              <td><code>pspsps.syntax.ref.*</code></td>
+              <td><code>asRef</code>, <code>asRefOfEffect</code></td>
+            </tr>
+            <tr>
+              <td>Stream</td>
+              <td><code>pspsps.syntax.stream.*</code></td>
+              <td><code>asStreamEval</code>, <code>asStreamEmits</code></td>
+            </tr>
+            <tr>
+              <td>Pull</td>
+              <td><code>pspsps.syntax.pull.*</code></td>
+              <td><code>asPullEval</code>, <code>asPullOutput1</code></td>
+            </tr>
+            <tr>
+              <td>Chunk</td>
+              <td><code>pspsps.syntax.chunk.*</code></td>
+              <td><code>asChunkSingleton</code>, <code>asChunk</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Choose one aggregate, or the focused families you need. Importing the same
+        family through several aggregates can make extension resolution ambiguous.
+        Cats&#39; usual syntax remains available alongside pspsps.</p>
+        <pre><code class="nohighlight"><span class="keyword">import</span><span> </span><span class="identifier">cats</span><span>.</span><span class="identifier">data</span><span>.</span><span class="type-name">OptionT</span><span>
+</span><span class="keyword">import</span><span> </span><span class="identifier">cats</span><span>.</span><span class="identifier">effect</span><span>.</span><span class="type-name">IO</span><span>
+</span><span class="keyword">import</span><span> </span><span class="identifier">cats</span><span>.</span><span class="identifier">syntax</span><span>.</span><span class="identifier">all</span><span>.*
+</span><span class="keyword">import</span><span> </span><span class="identifier">pspsps</span><span>.</span><span class="identifier">syntax</span><span>.</span><span class="identifier">common</span><span>.*
+
+</span><span class="keyword">val</span><span> </span><span class="identifier">optional</span><span>: </span><span class="type-name">OptionT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="number-literal">42</span><span>.</span><span class="identifier">some</span><span>.</span><span class="identifier">asOptionT</span><span>[</span><span class="type-name">IO</span><span>]
+</span><span class="comment">// optional: OptionT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int] = OptionT(
+//   Pure(Some(42))
+// )
+</span><span class="keyword">val</span><span> </span><span class="identifier">increased</span><span>: </span><span class="type-name">OptionT</span><span>[</span><span class="type-name">IO</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="identifier">optional</span><span>.</span><span class="identifier">map</span><span>(</span><span class="identifier">_</span><span> + </span><span class="number-literal">1</span><span>)
+</span><span class="comment">// increased: OptionT[[A &gt;: Nothing &lt;: Any] =&gt; IO[A], Int] = OptionT(
+//   Map(
+//     ioe = Pure(Some(42)),
+//     f = cats.data.OptionT$$Lambda$13138/0x00007f038a03eec0@62d117f8,
+//     event = cats.effect.tracing.TracingEvent$StackTrace
+//   )
+// )</span></code></pre>
+        
+        <h2 id="naming-and-nested-shapes" class="section"><a class="anchor-link left" href="#naming-and-nested-shapes"><i class="icofont-laika link">&#xef71;</i></a>Naming and nested shapes</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Operation</th>
+              <th>Meaning</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Wrap</code></td>
+              <td>Wrap the existing outer representation</td>
+              <td><code>fa.asOptionTWrap</code></td>
+            </tr>
+            <tr>
+              <td>Explicit effect parameter</td>
+              <td>Lift an inner Option or Either</td>
+              <td><code>opt.asOptionT[F]</code></td>
+            </tr>
+            <tr>
+              <td><code>LiftF</code></td>
+              <td>Lift successful values from an existing effect</td>
+              <td><code>fa.asEitherTLiftF[E]</code></td>
+            </tr>
+            <tr>
+              <td><code>Pure</code></td>
+              <td>Lift an already-computed value</td>
+              <td><code>a.asOptionTPure[F]</code></td>
+            </tr>
+            <tr>
+              <td><code>Eval</code></td>
+              <td>Evaluate an effect in the target datatype</td>
+              <td><code>fa.asStreamEval</code></td>
+            </tr>
+            <tr>
+              <td><code>Emit</code> / <code>Emits</code></td>
+              <td>Emit one value / collection elements</td>
+              <td><code>xs.asStreamEmits[F]</code></td>
+            </tr>
+            <tr>
+              <td><code>Make</code></td>
+              <td>Pair resource acquisition and release</td>
+              <td><code>acquire.asResourceMake(release)</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>For nested shapes, <code>asOptionTWrap</code> and <code>asEitherTWrap</code> explicitly select wrapping.
+        Cats&#39; <code>toOptionT</code> and <code>toEitherT</code> explicitly select lifting an inner Option or
+        Either. Use them when an overloaded short spelling would be ambiguous.</p>
+        <p>Browse <a href="api.html">API documentation</a> for all types and extension methods.</p>
+
+        
+<hr class="footer-rule"/>
+<footer>
+  Site generated by <a href="https://typelevel.org/Laika/">Laika</a> with the Helium theme.
+</footer>
+
+
+      </main>
+
+    </div>
+
+  </body>
+
+</html>

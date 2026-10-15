@@ -1,0 +1,967 @@
+<!DOCTYPE html><html data-pathToRoot="../" data-rawLocation="pspsps/builders" data-dynamicSideMenu="false"><head><meta charset="utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>pspsps.builders</title><link rel="shortcut icon" type="image/x-icon" href="../favicon.ico"></link><script type="text/javascript" src="../scripts/theme.js"></script><script type="text/javascript" src="../scripts/searchData.js" defer="true"></script><script type="text/javascript" src="../scripts/scastieConfiguration.js" defer="true"></script><link rel="stylesheet" href="../styles/theme/bundle.css"></link><link rel="stylesheet" href="../styles/theme/components/bundle.css"></link><link rel="stylesheet" href="../styles/theme/components/button/bundle.css"></link><link rel="stylesheet" href="../styles/theme/layout/bundle.css"></link><link rel="stylesheet" href="../styles/nord-light.css"></link><link rel="stylesheet" href="../styles/dotty-icons.css"></link><link rel="stylesheet" href="../styles/filter-bar.css"></link><link rel="stylesheet" href="../styles/code-snippets.css"></link><link rel="stylesheet" href="../styles/searchbar.css"></link><link rel="stylesheet" href="../styles/social-links.css"></link><link rel="stylesheet" href="../styles/versions-dropdown.css"></link><link rel="stylesheet" href="../styles/content-contributors.css"></link><link rel="stylesheet" href="../styles/fontawesome.css"></link><script type="text/javascript" src="../hljs/highlight.pack.js" defer="true"></script><script type="text/javascript" src="../scripts/hljs-scala3.js" defer="true"></script><script type="text/javascript" src="../scripts/ux.js" defer="true"></script><script type="text/javascript" src="../scripts/common/component.js" defer="true"></script><script type="text/javascript" src="../scripts/common/utils.js" defer="true"></script><script type="text/javascript" src="../scripts/components/FilterBar.js" defer="true"></script><script type="text/javascript" src="../scripts/components/DocumentableList.js" defer="true"></script><script type="text/javascript" src="../scripts/components/Input.js" defer="true"></script><script type="text/javascript" src="../scripts/components/FilterGroup.js" defer="true"></script><script type="text/javascript" src="../scripts/components/Filter.js" defer="true"></script><script type="text/javascript" src="../scripts/scaladoc-scalajs.js" defer="true"></script><script type="text/javascript" src="../scripts/contributors.js" defer="true"></script><script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" defer="true"></script><script type="text/javascript" src="https://d3js.org/d3.v6.min.js" defer="true"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/graphlib-dot@0.6.2/dist/graphlib-dot.min.js" defer="true"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.6.1/dagre-d3.min.js" defer="true"></script><script type="text/javascript" src="https://scastie.scala-lang.org/embedded.js" defer="true"></script><script type="text/javascript" src="../scripts/data.js" defer="true"></script><link rel="stylesheet" href="../styles/apistyles.css"></link><script>var pathToRoot = "../";</script></head><body><div id=""><div id="header" class="body-small"><div class="header-container-left"><a href="../" class="logo-container"><span id="project-logo" class="project-logo"><img src="../project-logo/cat.svg"></img></span><span id="dark-project-logo" class="project-logo"><img src="../project-logo/cat.svg"></img></span><span class="project-name h300">pspsps-docs</span></a><span onclick="dropdownHandler(event)" class="text-button with-arrow" id="dropdown-trigger"><a><div class="projectVersion">0.1-d7fe260-SNAPSHOT</div></a></span><div id="version-dropdown" class="dropdown-menu"></div></div><div class="header-container-right"><button id="search-toggle" class="icon-button"></button><span id="theme-toggle" class="icon-button"></span><span id="mobile-menu-toggle" class="icon-button hamburger"></span></div></div><div id="mobile-menu"><div class="mobile-menu-header body-small"><span class="mobile-menu-logo"><span id="project-logo" class="project-logo"><img src="../project-logo/cat.svg"></img></span><span id="dark-project-logo" class="project-logo"><img src="../project-logo/cat.svg"></img></span><span class="project-name h300">pspsps-docs</span></span><button id="mobile-menu-close" class="icon-button close"></button></div><div class="mobile-menu-container body-medium"><input id="mobile-scaladoc-searchbar-input" class="scaladoc-searchbar-input" type="search" placeholder="Find anything"></input><span id="mobile-theme-toggle" class="mobile-menu-item mode"></span></div></div><span id="mobile-sidebar-toggle" class="floating-button"></span><div id="leftColumn" class="body-small"><div class="switcher-container"><a id="api-nav-button" class="switcher h100 selected" href="../index.html">API</a></div><nav id="api-nav" class="side-menu"><div class="ni n0 expanded"><span class="nh h100 expanded cs"><button class="ar icon-button expanded"></button><a href="../pspsps.html"><span class="micon pa"></span><span>pspsps</span></a></span><div class="ni n1 expanded"><span class="nh h100 selected"><button class="ar icon-button expanded"></button><a href="#"><span class="micon pa"></span><span>builders</span></a></span><div class="ni n2 "><span class="nh "><a href="builders/Branch.html"><span class="micon tr"></span><span>Branch</span></a></span></div><div class="ni n2"><span class="nh "><button class="ar icon-button "></button><a href="builders/Branch$.html"><span class="micon ob"></span><span>Branch</span></a></span><div class="ni n3 "><span class="nh "><a href="builders/Branch$$EffectShape$.html"><span class="micon ob"></span><span>EffectShape</span></a></span></div><div class="ni n3 "><span class="nh "><a href="builders/Branch$$EffectShape.html"><span class="micon tr"></span><span>EffectShape</span></a></span></div></div><div class="ni n2 "><span class="nh "><a href="builders/Either$.html"><span class="micon ob"></span><span>Either</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/EitherCondition.html"><span class="micon cl"></span><span>EitherCondition</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/EitherT$.html"><span class="micon ob"></span><span>EitherT</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/EitherWithLeft.html"><span class="micon cl"></span><span>EitherWithLeft</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/EitherWithRight.html"><span class="micon cl"></span><span>EitherWithRight</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/Option$.html"><span class="micon ob"></span><span>Option</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/OptionCondition.html"><span class="micon cl"></span><span>OptionCondition</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/OptionT$.html"><span class="micon ob"></span><span>OptionT</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/PureEitherCondition.html"><span class="micon cl"></span><span>PureEitherCondition</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/PureEitherWithLeft.html"><span class="micon cl"></span><span>PureEitherWithLeft</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/PureEitherWithRight.html"><span class="micon cl"></span><span>PureEitherWithRight</span></a></span></div><div class="ni n2 "><span class="nh "><a href="builders/PureOptionCondition.html"><span class="micon cl"></span><span>PureOptionCondition</span></a></span></div></div><div class="ni n1"><span class="nh "><button class="ar icon-button "></button><a href="laws.html"><span class="micon pa"></span><span>laws</span></a></span><div class="ni n2"><span class="nh "><button class="ar icon-button "></button><a href="laws/discipline.html"><span class="micon pa"></span><span>discipline</span></a></span><div class="ni n3 "><span class="nh "><a href="laws/discipline/ConditionalTests$.html"><span class="micon ob"></span><span>ConditionalTests</span></a></span></div><div class="ni n3 "><span class="nh "><a href="laws/discipline/ConditionalTests.html"><span class="micon tr"></span><span>ConditionalTests</span></a></span></div><div class="ni n3 "><span class="nh "><a href="laws/discipline/ConstructorTests.html"><span class="micon tr"></span><span>ConstructorTests</span></a></span></div><div class="ni n3 "><span class="nh "><a href="laws/discipline/ConstructorTests$.html"><span class="micon ob"></span><span>ConstructorTests</span></a></span></div></div><div class="ni n2 "><span class="nh "><a href="laws/ConditionalLaws.html"><span class="micon cl"></span><span>ConditionalLaws</span></a></span></div><div class="ni n2 "><span class="nh "><a href="laws/ConditionalLaws$.html"><span class="micon ob"></span><span>ConditionalLaws</span></a></span></div><div class="ni n2 "><span class="nh "><a href="laws/ConstructorLaws$.html"><span class="micon ob"></span><span>ConstructorLaws</span></a></span></div><div class="ni n2 "><span class="nh "><a href="laws/ConstructorLaws.html"><span class="micon cl"></span><span>ConstructorLaws</span></a></span></div></div><div class="ni n1"><span class="nh "><button class="ar icon-button "></button><a href="syntax.html"><span class="micon pa"></span><span>syntax</span></a></span><div class="ni n2 "><span class="nh "><a href="syntax/BasicResourceSyntax.html"><span class="micon tr"></span><span>BasicResourceSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/ChunkSyntax.html"><span class="micon tr"></span><span>ChunkSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/CommonSyntax.html"><span class="micon tr"></span><span>CommonSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/ConditionalSyntax.html"><span class="micon tr"></span><span>ConditionalSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/CoreSyntax.html"><span class="micon tr"></span><span>CoreSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/EffectSyntax.html"><span class="micon tr"></span><span>EffectSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/EitherConditionalSyntax.html"><span class="micon tr"></span><span>EitherConditionalSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/EitherTConditionalSyntax.html"><span class="micon tr"></span><span>EitherTConditionalSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/EitherTSyntax.html"><span class="micon tr"></span><span>EitherTSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/Fs2Syntax.html"><span class="micon tr"></span><span>Fs2Syntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/IorTSyntax.html"><span class="micon tr"></span><span>IorTSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/KleisliSyntax.html"><span class="micon tr"></span><span>KleisliSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/NullableSyntax.html"><span class="micon tr"></span><span>NullableSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/OptionConditionalSyntax.html"><span class="micon tr"></span><span>OptionConditionalSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/OptionTConditionalSyntax.html"><span class="micon tr"></span><span>OptionTConditionalSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/OptionTSyntax.html"><span class="micon tr"></span><span>OptionTSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/PullSyntax.html"><span class="micon tr"></span><span>PullSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/RefSyntax.html"><span class="micon tr"></span><span>RefSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/ResourceAdvancedSyntax.html"><span class="micon tr"></span><span>ResourceAdvancedSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/ResourceInteropSyntax.html"><span class="micon tr"></span><span>ResourceInteropSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/ResourceSyntax.html"><span class="micon tr"></span><span>ResourceSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/StateTSyntax.html"><span class="micon tr"></span><span>StateTSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/StreamSyntax.html"><span class="micon tr"></span><span>StreamSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/WriterTSyntax.html"><span class="micon tr"></span><span>WriterTSyntax</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/all$.html"><span class="micon ob"></span><span>all</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/chunk$.html"><span class="micon ob"></span><span>chunk</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/common$.html"><span class="micon ob"></span><span>common</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/conditional$.html"><span class="micon ob"></span><span>conditional</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/core$.html"><span class="micon ob"></span><span>core</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/effect$.html"><span class="micon ob"></span><span>effect</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/either$.html"><span class="micon ob"></span><span>either</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/eitherT$.html"><span class="micon ob"></span><span>eitherT</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/iorT$.html"><span class="micon ob"></span><span>iorT</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/kleisli$.html"><span class="micon ob"></span><span>kleisli</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/nullable$.html"><span class="micon ob"></span><span>nullable</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/option$.html"><span class="micon ob"></span><span>option</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/optionT$.html"><span class="micon ob"></span><span>optionT</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/pull$.html"><span class="micon ob"></span><span>pull</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/ref$.html"><span class="micon ob"></span><span>ref</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/resource$.html"><span class="micon ob"></span><span>resource</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/resourceAdvanced$.html"><span class="micon ob"></span><span>resourceAdvanced</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/resourceInterop$.html"><span class="micon ob"></span><span>resourceInterop</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/stateT$.html"><span class="micon ob"></span><span>stateT</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/stream$.html"><span class="micon ob"></span><span>stream</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/streaming$.html"><span class="micon ob"></span><span>streaming</span></a></span></div><div class="ni n2 "><span class="nh "><a href="syntax/writerT$.html"><span class="micon ob"></span><span>writerT</span></a></span></div></div></div></nav></div><div id="footer" class="body-small"><div class="left-container">Generated with</div><div class="right-container"><div class="text"></div></div><div class="text-mobile"></div></div><div id="scaladoc-searchBar"></div><div id="main"><div class="breadcrumbs container"><a href="../index.html">pspsps-docs</a>/<a href="../pspsps.html">pspsps</a>/<a href="builders.html">pspsps.builders</a></div><div id="content" class="body-medium"><div><div class="cover-header">
+ <span class="icon"><span class="micon pa"></span></span>
+ <h1 class="h600 single">pspsps.builders</h1>
+</div>
+<div class="fqname body-large">
+ <span></span>
+</div>
+<div class="main-signature mono-small-block">
+ <div class="signature">
+  <span class="modifiers"></span><span class="kind"><span t="k">package </span></span><a href="builders.html" t="n" class="documentableName ">pspsps.builders</a>
+ </div>
+</div>
+<section id="members-list">
+ <h2 class="h500">Members list</h2>
+ <div class="documentableFilter">
+  <div class="filtersContainer"></div><input class="filterableInput" placeholder="Filter by any phrase" data-test-id="filterBarInput" type="search"><button class="clearButton label-only-button" data-test-id="filterBarClearButton">Clear all</button>
+ </div>
+ <div class="membersList expand">
+  <div class="tabs">
+   <div class="contents">
+    <section id="Type-members">
+     <div data-togglable="Type members" class="tab expand">
+      <div class="member-group-header">
+       <h3 data-togglable="Type members" class="h400">Type members</h3>
+      </div>
+      <section id="Classlikes">
+       <div class="documentableList expand">
+        <div class="documentableList-expander">
+         <button class="icon-button show-content expand"></button>
+         <h4 class="groupHeader h200">Classlikes</h4>
+        </div>
+        <div class="documentableElement" data-f-keywords="sealed">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">sealed </span></span><span class="kind"><span t="k">trait </span></span><a href="builders/Branch.html" t="n" class="documentableName ">Branch</a>[<span t="k"></span><span data-unresolved-link="" t="t">F</span>[<span t="t">_</span>], <span t="k"></span><span data-unresolved-link="" t="t">Input</span>, <span t="k"></span><span data-unresolved-link="" t="t">A</span>]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>Internal-to-the-DSL interpretation of a branch argument.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>Internal-to-the-DSL interpretation of a branch argument.</p>
+              <p>Automatic syntax unwraps exactly one F layer. The plain-value instance is unavailable for an F-shaped input. Use withLeftPure / withRightPure / withSomePure when the effect itself is intentionally the payload.</p>
+              <p>Input is invariant: this prevents an effect from being widened to Any and silently selected as a pure value. Widen effect subclasses to F[A], or use the explicit ...F methods (which supply that expected type).</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Companion
+              </dt>
+              <dd class="body-medium">
+               <a href="builders/Branch$.html">object</a>
+              </dd>
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L38" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"></span><span class="kind"><span t="k">object </span></span><a href="builders/Branch$.html" t="n" class="documentableName ">Branch</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="cover">
+             <div class="doc"></div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Companion
+              </dt>
+              <dd class="body-medium">
+               <a href="builders/Branch.html">trait</a>
+              </dd>
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L41" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+              <dt class="body-small">
+               Self type
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <span></span>
+                <div>
+                 <a href="builders/Branch$.html" t="n">Branch</a>.<span t="k">type</span>
+                </div>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"></span><span class="kind"><span t="k">object </span></span><a href="builders/Either$.html" t="n" class="documentableName ">Either</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>Opt-in staged conditional factory. This is not the standard-library companion.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>Opt-in staged conditional factory. This is not the standard-library companion.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/PureConditionalBuilders.scala#L58" target="_blank">PureConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+              <dt class="body-small">
+               Self type
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <span></span>
+                <div>
+                 <a href="builders/Either$.html" t="n">Either</a>.<span t="k">type</span>
+                </div>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">class </span></span><a href="builders/EitherCondition.html" t="n" class="documentableName ">EitherCondition</a>[<span t="k"></span><span data-unresolved-link="" t="t">F</span>[<span t="t">_</span>]]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>First stage: either branch can be supplied first; true always selects Right.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>First stage: either branch can be supplied first; true always selects Right.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L77" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"></span><span class="kind"><span t="k">object </span></span><a href="builders/EitherT$.html" t="n" class="documentableName ">EitherT</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>Conditional-constructor namespace, intentionally not the Cats companion.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>Conditional-constructor namespace, intentionally not the Cats companion.</p>
+              <p>Import pspsps.builders.EitherT for EitherT.cond(...). The original cats.data.EitherT.cond is left untouched. This focused factory does not re-export Cats' other constructors: keep those qualified or separately aliased.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L172" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+              <dt class="body-small">
+               Self type
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <span></span>
+                <div>
+                 <a href="builders/EitherT$.html" t="n">EitherT</a>.<span t="k">type</span>
+                </div>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">class </span></span><a href="builders/EitherWithLeft.html" t="n" class="documentableName ">EitherWithLeft</a>[<span t="k"></span><span data-unresolved-link="" t="t">F</span>[<span t="t">_</span>], <span t="k"></span><span data-unresolved-link="" t="t">A</span>]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>Second stage after a left branch. Supplying Right returns Cats' EitherT.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>Second stage after a left branch. Supplying Right returns Cats' EitherT.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L101" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">class </span></span><a href="builders/EitherWithRight.html" t="n" class="documentableName ">EitherWithRight</a>[<span t="k"></span><span data-unresolved-link="" t="t">F</span>[<span t="t">_</span>], <span t="k"></span><span data-unresolved-link="" t="t">B</span>]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>Second stage after a right branch. Supplying Left returns Cats' EitherT.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>Second stage after a right branch. Supplying Left returns Cats' EitherT.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L123" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"></span><span class="kind"><span t="k">object </span></span><a href="builders/Option$.html" t="n" class="documentableName ">Option</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>Opt-in staged conditional factory.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>Opt-in staged conditional factory.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/PureConditionalBuilders.scala#L66" target="_blank">PureConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+              <dt class="body-small">
+               Self type
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <span></span>
+                <div>
+                 <a href="builders/Option$.html" t="n">Option</a>.<span t="k">type</span>
+                </div>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">class </span></span><a href="builders/OptionCondition.html" t="n" class="documentableName ">OptionCondition</a>[<span t="k"></span><span data-unresolved-link="" t="t">F</span>[<span t="t">_</span>]]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>true selects Some; false returns F.pure(None) without evaluating the payload.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>true selects Some; false returns F.pure(None) without evaluating the payload.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L145" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"></span><span class="kind"><span t="k">object </span></span><a href="builders/OptionT$.html" t="n" class="documentableName ">OptionT</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>Conditional-constructor namespace. False has no payload, so withSome completes it.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>Conditional-constructor namespace. False has no payload, so withSome completes it.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L190" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+              <dt class="body-small">
+               Self type
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <span></span>
+                <div>
+                 <a href="builders/OptionT$.html" t="n">OptionT</a>.<span t="k">type</span>
+                </div>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">class </span></span><a href="builders/PureEitherCondition.html" t="n" class="documentableName ">PureEitherCondition</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>A staged conditional for Scala's Either. true selects Right in either order.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>A staged conditional for Scala's Either. true selects Right in either order.</p>
+              <p>The Boolean is already evaluated. Payloads remain by-name until the second branch completes the builder. No Cats instance or effect execution is needed.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/PureConditionalBuilders.scala#L24" target="_blank">PureConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">class </span></span><a href="builders/PureEitherWithLeft.html" t="n" class="documentableName ">PureEitherWithLeft</a>[<span t="k"></span><span data-unresolved-link="" t="t">A</span>]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>Only the missing branch can complete this stage.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>Only the missing branch can complete this stage.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/PureConditionalBuilders.scala#L32" target="_blank">PureConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">class </span></span><a href="builders/PureEitherWithRight.html" t="n" class="documentableName ">PureEitherWithRight</a>[<span t="k"></span><span data-unresolved-link="" t="t">B</span>]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>Supplying Right first does not invert the meaning of the condition.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>Supplying Right first does not invert the meaning of the condition.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/PureConditionalBuilders.scala#L40" target="_blank">PureConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" data-f-keywords="final">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"><span t="k">final </span></span><span class="kind"><span t="k">class </span></span><a href="builders/PureOptionCondition.html" t="n" class="documentableName ">PureOptionCondition</a>
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>false returns None without evaluating the payload; true returns Some, including Some(null). This is Option.when semantics, not Option.apply.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>false returns None without evaluating the payload; true returns Some, including Some(null). This is Option.when semantics, not Option.apply.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/PureConditionalBuilders.scala#L50" target="_blank">PureConditionalBuilders.scala</a>
+              </dd>
+              <dt class="body-small">
+               Supertypes
+              </dt>
+              <dd class="body-medium">
+               <div class="mono-small-block supertypes">
+                <div>
+                 class <span data-unresolved-link="" t="n">Object</span>
+                </div>
+                <div>
+                 trait <span data-unresolved-link="" t="n">Matchable</span>
+                </div>
+                <div>
+                 class <span data-unresolved-link="" t="n">Any</span>
+                </div><span></span>
+               </div>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </section>
+      <section id="Types">
+       <div class="documentableList expand">
+        <div class="documentableList-expander">
+         <button class="icon-button show-content expand"></button>
+         <h4 class="groupHeader h200">Types</h4>
+        </div>
+        <div class="documentableElement" id="Either-0">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"></span><span class="kind"><span t="k">type </span></span><a href="builders.html#Either-0" t="n" class="documentableName ">Either</a>[<span t="k">+</span><span data-unresolved-link="" t="t">A</span>, <span t="k">+</span><span data-unresolved-link="" t="t">B</span>] = <a href="https://www.scala-lang.org/api/2.13.18/scala/util/Either.html" t="t">Either</a>[<span data-unresolved-link="" t="t">A</span>, <span data-unresolved-link="" t="t">B</span>]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>The result is Scala's Either, not a wrapper type.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>The result is Scala's Either, not a wrapper type.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/PureConditionalBuilders.scala#L55" target="_blank">PureConditionalBuilders.scala</a>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" id="EitherT-0">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"></span><span class="kind"><span t="k">type </span></span><a href="builders.html#EitherT-0" t="n" class="documentableName ">EitherT</a>[<span t="k"></span><span data-unresolved-link="" t="t">F</span>[<span t="t">_</span>], <span t="k"></span><span data-unresolved-link="" t="t">A</span>, <span t="k"></span><span data-unresolved-link="" t="t">B</span>] = <a href="https://www.javadoc.io/doc/org.typelevel/cats-docs_3/2.11.0/cats/data/EitherT.html" t="t">EitherT</a>[<span data-unresolved-link="" t="t">F</span>, <span data-unresolved-link="" t="t">A</span>, <span data-unresolved-link="" t="t">B</span>]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>A type alias, not a new transformer or an implicit conversion.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>A type alias, not a new transformer or an implicit conversion.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L164" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" id="Option-0">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"></span><span class="kind"><span t="k">type </span></span><a href="builders.html#Option-0" t="n" class="documentableName ">Option</a>[<span t="k">+</span><span data-unresolved-link="" t="t">A</span>] = <a href="https://www.scala-lang.org/api/2.13.18/scala/Option.html" t="t">Option</a>[<span data-unresolved-link="" t="t">A</span>]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>The result is Scala's Option, not a wrapper type.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>The result is Scala's Option, not a wrapper type.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/PureConditionalBuilders.scala#L63" target="_blank">PureConditionalBuilders.scala</a>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="documentableElement" id="OptionT-0">
+         <div class="documentableElement-expander">
+          <button class="icon-button ar show-content"></button>
+          <div class="header monospace mono-medium">
+           <div class="signature">
+            <span class="modifiers"></span><span class="kind"><span t="k">type </span></span><a href="builders.html#OptionT-0" t="n" class="documentableName ">OptionT</a>[<span t="k"></span><span data-unresolved-link="" t="t">F</span>[<span t="t">_</span>], <span t="k"></span><span data-unresolved-link="" t="t">A</span>] = <a href="https://www.javadoc.io/doc/org.typelevel/cats-docs_3/2.11.0/cats/data/OptionT.html" t="t">OptionT</a>[<span data-unresolved-link="" t="t">F</span>, <span data-unresolved-link="" t="t">A</span>]
+           </div>
+          </div>
+         </div>
+         <div class="docs">
+          <span class="modifiers"></span>
+          <div>
+           <div class="originInfo"></div>
+           <div class="memberDocumentation">
+            <div class="documentableBrief doc">
+             <p>A type alias, not a new transformer or an implicit conversion.</p>
+            </div>
+            <div class="cover">
+             <div class="doc">
+              <p>A type alias, not a new transformer or an implicit conversion.</p>
+             </div>
+             <h2 class="h200">Attributes</h2>
+             <dl class="attributes attributes-small">
+              <dt class="body-small">
+               Source
+              </dt>
+              <dd class="body-medium">
+               <a href="https://github.com/DarkWingMcQuack/pspsps/blob/d7fe26008eddafef2ae1ea0bce9da99efc70f276/modules/core/src/main/scala-3/pspsps/builders/ConditionalBuilders.scala#L187" target="_blank">ConditionalBuilders.scala</a>
+              </dd>
+             </dl>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </section>
+     </div>
+    </section>
+   </div>
+  </div>
+ </div>
+</section></div><div id="toc" class="body-small"><div id="toc-container"><span class="toc-title h200">In this article</span><nav class="toc-nav"><ul class="toc-list"><li><a href="#members-list">Members list</a><ul><li><a href="#Type-members">Type members</a><ul><li><a href="#Classlikes">Classlikes</a></li><li><a href="#Types">Types</a></li></ul></li></ul></li></ul></nav></div></div></div><div id="footer" class="body-small mobile-footer"><div class="left-container">Generated with</div><div class="right-container"><div class="text"></div></div><div class="text-mobile"></div></div></div></div></body></html>
