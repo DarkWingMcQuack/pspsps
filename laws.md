@@ -12,11 +12,12 @@ bring ScalaCheck or Discipline into their dependency graphs.
 
 ```scala
 import cats.instances.option.*
+import cats.syntax.all.*
 import pspsps.laws.ConstructorLaws
 
 val constructors = ConstructorLaws[Option]
-// constructors: ConstructorLaws[[A >: Nothing <: Any] => Option[A]] = pspsps.laws.ConstructorLaws@468ea2e8
-val input: Option[Option[Int]] = Some(Some(42))
+// constructors: ConstructorLaws[[A >: Nothing <: Any] => Option[A]] = pspsps.laws.ConstructorLaws@79e13924
+val input: Option[Option[Int]] = 42.some.some
 // input: Option[Option[Int]] = Some(Some(42))
 val roundTrip = constructors.optionWrap(input)
 // roundTrip: IsEq[Option[Option[Int]]] = IsEq(
@@ -59,7 +60,7 @@ import cats.instances.list.*
 import pspsps.laws.ConditionalLaws
 
 val conditional = ConditionalLaws[List]
-// conditional: ConditionalLaws[List] = pspsps.laws.ConditionalLaws@51a8ee3
+// conditional: ConditionalLaws[List] = pspsps.laws.ConditionalLaws@ab93215
 val selected = conditional.eitherCondition(List(true, false), List("missing"), List(42))
 // selected: IsEq[List[Either[String, Int]]] = IsEq(
 //   lhs = List(Right(42), Left("missing")),
@@ -91,7 +92,7 @@ of supplied Either branches changes neither selection nor the effect's order.
 For Option, an absent condition produces no outer result:
 
 ```scala
-val absent = ConditionalLaws[Option].optionCondition(Option.empty[Boolean], Some(42))
+val absent = ConditionalLaws[Option].optionCondition(none[Boolean], 42.some)
 // absent: IsEq[Option[Option[Int]]] = IsEq(lhs = None, rhs = None)
 absent.lhs
 // res4: Option[Option[Int]] = None
@@ -103,12 +104,12 @@ For Either, the error of a failed condition stays in the outer effect:
 import cats.instances.either.*
 
 type ErrorOr[A] = Either[String, A]
-val failedCondition: ErrorOr[Boolean] = Left("condition failed")
+val failedCondition: ErrorOr[Boolean] = "condition failed".asLeft[Boolean]
 // failedCondition: Either[String, Boolean] = Left("condition failed")
 val failed = ConditionalLaws[ErrorOr].eitherCondition[String, Int](
   failedCondition,
-  Right("missing"),
-  Right(42)
+  "missing".asRight[String],
+  42.asRight[String]
 )
 // failed: IsEq[ErrorOr[Either[String, Int]]] = IsEq(
 //   lhs = Left("condition failed"),
@@ -129,15 +130,15 @@ Create rulesets for the outer effect you want to check:
 import pspsps.laws.discipline.{ConditionalTests, ConstructorTests}
 
 val optionRules = ConstructorTests[Option].optionT[Int]
-// optionRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@77918df9
+// optionRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@5f1e174c
 val eitherRules = ConstructorTests[Option].eitherT[String, Int]
-// eitherRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@2a21d4cd
+// eitherRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@3c9e86d9
 val listConditionalRules = ConditionalTests[List].eitherT[String, Int]
-// listConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@729cfc1e
+// listConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@39acef55
 val optionalConditionalRules = ConditionalTests[Option].optionT[Int]
-// optionalConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@47b231cc
+// optionalConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@53a72495
 val errorConditionalRules = ConditionalTests[ErrorOr].eitherT[String, Int]
-// errorConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@1bce036
+// errorConditionalRules: RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@39386605
 ```
 
 Register these using Discipline MUnit's `checkAll`. Provide Applicative or

@@ -8,6 +8,7 @@ These builders live in `pspsps-core` and add no dependencies.
 
 ```scala
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.builders.{Either, EitherT, Option, OptionT}
 
 val pureEither: Either[String, Int] =
@@ -19,23 +20,23 @@ val pureOption: Option[Int] =
 // pureOption: Option[Int] = Some(42)
 
 val checked: EitherT[IO, String, Int] =
-  EitherT.cond(IO.pure(true))
+  EitherT.cond(true.pure[IO])
     .withLeft("missing")
-    .withRight(IO.pure(42))
+    .withRight(42.pure[IO])
 // checked: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12221/0x00007f6e45efcb80@39fc43c7,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@157b3db4,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
 
 val optional: OptionT[IO, Int] =
-  OptionT.cond(IO.pure(true)).withSome(IO.pure(42))
+  OptionT.cond(true.pure[IO]).withSome(42.pure[IO])
 // optional: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12221/0x00007f6e45efcb80@353fa632,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@4f8c1b80,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -46,7 +47,7 @@ val pureTest: EitherT[IO, String, Int] =
 // pureTest: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12228/0x00007f6e45eff718@2e164a07,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -56,7 +57,7 @@ val pureOptionTest: OptionT[IO, Int] =
 // pureOptionTest: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.OptionCondition$$Lambda$12230/0x00007f6e45effae0@60539a78,
+//     f = pspsps.builders.OptionCondition$$Lambda$12208/0x00007fce6dec85e8@169848a0,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -79,7 +80,7 @@ val aliased = EitherTBuilder.cond[IO](true).withLeft("missing").withRight(42)
 // aliased: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12228/0x00007f6e45eff718@2e164a07,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -96,6 +97,7 @@ use `*` and `as`. Both versions support the same staged branch API.
 
 ```scala
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.syntax.common.*
 
 val a: Either[String, Int] =
@@ -107,21 +109,21 @@ val b: Option[Int] =
 // b: Option[Int] = Some(42)
 
 val c: cats.data.EitherT[IO, String, Int] =
-  IO.pure(true).asEitherTCond.withLeft("missing").withRight(IO.pure(42))
+  true.pure[IO].asEitherTCond.withLeft("missing").withRight(42.pure[IO])
 // c: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12221/0x00007f6e45efcb80@f32ab04,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@5a984431,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
 
 val d: cats.data.OptionT[IO, Int] =
-  IO.pure(true).asOptionTCond.withSome(IO.pure(42))
+  true.pure[IO].asOptionTCond.withSome(42.pure[IO])
 // d: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12221/0x00007f6e45efcb80@477492e6,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@75e714f9,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -131,7 +133,7 @@ val e: cats.data.EitherT[IO, String, Int] =
 // e: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12228/0x00007f6e45eff718@2e164a07,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -141,7 +143,7 @@ val f: cats.data.OptionT[IO, Int] =
 // f: OptionT[[A >: Nothing <: Any] => IO[A], Int] = OptionT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.OptionCondition$$Lambda$12230/0x00007f6e45effae0@60539a78,
+//     f = pspsps.builders.OptionCondition$$Lambda$12208/0x00007fce6dec85e8@169848a0,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -185,69 +187,70 @@ Every row also works with Right supplied first:
 
 ```scala
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.builders.EitherT
 
 EitherT.cond[IO](true).withLeft("no").withRight(42)
 // res6: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12228/0x00007f6e45eff718@2e164a07,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
-EitherT.cond[IO](true).withLeft(IO.pure("no")).withRight(42)
+EitherT.cond[IO](true).withLeft("no".pure[IO]).withRight(42)
 // res7: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12228/0x00007f6e45eff718@2e164a07,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
-EitherT.cond[IO](true).withLeft("no").withRight(IO.pure(42))
+EitherT.cond[IO](true).withLeft("no").withRight(42.pure[IO])
 // res8: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12228/0x00007f6e45eff718@2e164a07,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
-EitherT.cond[IO](true).withLeft(IO.pure("no")).withRight(IO.pure(42))
+EitherT.cond[IO](true).withLeft("no".pure[IO]).withRight(42.pure[IO])
 // res9: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Pure(42),
-//     f = pspsps.builders.EitherWithLeft$$Lambda$12228/0x00007f6e45eff718@2e164a07,
+//     f = pspsps.builders.EitherWithLeft$$Lambda$12206/0x00007fce6dec8220@c9d0dad,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
-EitherT.cond(IO.pure(true)).withLeft("no").withRight(42)
+EitherT.cond(true.pure[IO]).withLeft("no").withRight(42)
 // res10: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12221/0x00007f6e45efcb80@5baeae7d,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@11739f8d,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
-EitherT.cond(IO.pure(true)).withLeft(IO.pure("no")).withRight(42)
+EitherT.cond(true.pure[IO]).withLeft("no".pure[IO]).withRight(42)
 // res11: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12221/0x00007f6e45efcb80@27d26f2a,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@45fa184b,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
-EitherT.cond(IO.pure(true)).withLeft("no").withRight(IO.pure(42))
+EitherT.cond(true.pure[IO]).withLeft("no").withRight(42.pure[IO])
 // res12: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12221/0x00007f6e45efcb80@3d228a5f,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@5d5b7509,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
-EitherT.cond(IO.pure(true)).withLeft(IO.pure("no")).withRight(IO.pure(42))
+EitherT.cond(true.pure[IO]).withLeft("no".pure[IO]).withRight(42.pure[IO])
 // res13: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12221/0x00007f6e45efcb80@5e22dcbf,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@10d6f287,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -272,26 +275,27 @@ payloads:
 
 ```scala
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.builders.{EitherT, OptionT}
 
-EitherT.condF(IO.pure(true))
+EitherT.condF(true.pure[IO])
   .withLeftPure("missing")
-  .withRightF(IO.pure(42))
+  .withRightF(42.pure[IO])
 // res15: EitherT[IO, String, Int] = EitherT(
 //   FlatMap(
 //     ioe = Pure(true),
-//     f = pspsps.builders.Decision$$anon$2$$Lambda$12221/0x00007f6e45efcb80@70514c40,
+//     f = pspsps.builders.Decision$$anon$2$$Lambda$12199/0x00007fce6dec5538@1d5488e7,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
 
 // Store IO[Int] as the payload, instead of interpreting it as the outer effect.
 val nested: cats.data.OptionT[IO, IO[Int]] =
-  OptionT.condPure[IO](true).withSomePure(IO.pure(42))
+  OptionT.condPure[IO](true).withSomePure(42.pure[IO])
 // nested: OptionT[[A >: Nothing <: Any] => IO[A], IO[Int]] = OptionT(
 //   Map(
 //     ioe = Pure(Pure(42)),
-//     f = pspsps.builders.OptionCondition$$Lambda$12230/0x00007f6e45effae0@60539a78,
+//     f = pspsps.builders.OptionCondition$$Lambda$12208/0x00007fce6dec85e8@169848a0,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -354,13 +358,14 @@ values; an effect can itself be such a value:
 
 ```scala
 import cats.effect.IO
+import cats.syntax.all.*
 import pspsps.builders.{Either, Option}
 
 val a: Either[String, IO[Int]] =
-  Either.cond(true).withLeft("missing").withRight(IO.pure(42))
+  Either.cond(true).withLeft("missing").withRight(42.pure[IO])
 // a: Either[String, IO[Int]] = Right(Pure(42))
 val b: Option[IO[Int]] =
-  Option.cond(true).withSome(IO.pure(42))
+  Option.cond(true).withSome(42.pure[IO])
 // b: Option[IO[Int]] = Some(Pure(42))
 ```
 

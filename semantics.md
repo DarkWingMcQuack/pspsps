@@ -11,11 +11,11 @@ Nested shapes benefit from explicit names:
 ```scala
 import cats.data.{EitherT, OptionT}
 import cats.effect.IO
-import cats.syntax.option.*
+import cats.syntax.all.*
 import pspsps.syntax.common.*
 import fs2.{Pull, Stream}
 
-val nested: Option[Option[Int]] = Some(Some(42))
+val nested: Option[Option[Int]] = 42.some.some
 // nested: Option[Option[Int]] = Some(Some(42))
 val wrapped: OptionT[Option, Int] = nested.asOptionTWrap
 // wrapped: OptionT[[A >: Nothing <: Any] => Option[A], Int] = OptionT(
@@ -42,7 +42,7 @@ val keepFailure: EitherT[IO, String, Int] = operation.asEitherTLiftF[String]
 // keepFailure: EitherT[[A >: Nothing <: Any] => IO[A], String, Int] = EitherT(
 //   Map(
 //     ioe = Error(java.lang.RuntimeException: unavailable),
-//     f = cats.data.EitherT$RightPartiallyApplied$$$Lambda$12743/0x00007f6e45fc76e8@511e5e48,
+//     f = cats.data.EitherT$RightPartiallyApplied$$$Lambda$12706/0x00007fce6df94208@2931c529,
 //     event = cats.effect.tracing.TracingEvent$StackTrace
 //   )
 // )
@@ -60,16 +60,16 @@ when the application executes the outer effect.
 An effect can evaluate to a value without acquiring a cleanup obligation:
 
 ```scala
-val acquire: IO[String] = IO.pure("connection")
+val acquire: IO[String] = "connection".pure[IO]
 // acquire: IO[String] = Pure("connection")
 val release: String => IO[Unit] = _ => IO.unit
-// release: Function1[String, IO[Unit]] = repl.MdocSession$MdocApp$$Lambda$12961/0x00007f6e4605a440@4a57bbbd
+// release: Function1[String, IO[Unit]] = repl.MdocSession$MdocApp$$Lambda$12928/0x00007fce6e012440@7fff8611
 
 val evaluated = acquire.asResourceEval
 // evaluated: Resource[IO, String] = Eval(Pure("connection"))
 val managed = acquire.asResourceMake(release)
 // managed: Resource[IO, String] = Allocate(
-//   cats.effect.kernel.Resource$$$Lambda$12751/0x00007f6e45fe6cf0@6bf3d870
+//   cats.effect.kernel.Resource$$$Lambda$12714/0x00007fce6df9da40@1e2ad08f
 // )
 val scoped: Stream[IO, String] = managed.asStreamResource
 // scoped: Stream[[A >: Nothing <: Any] => IO[A], String] = Stream(..)
@@ -85,7 +85,7 @@ canceled before returning its value must clean up any partial acquisition itself
 ## Suspend effects at their source
 
 Scala evaluates an ordinary receiver before calling its extension.
-`IO.pure(openHandle())` has already called `openHandle`; a later constructor cannot
+`openHandle().pure[IO]` has already called `openHandle`; a later constructor cannot
 make that call lazy. Use `IO.delay(openHandle())` or `IO.blocking(openHandle())`
 at the original effect boundary. Already-started Future values retain Future's
 execution behavior.
@@ -101,11 +101,11 @@ val oneList: Stream[IO, List[Int]] = List(1, 2, 3).asStreamEmit[IO]
 // oneList: Stream[[A >: Nothing <: Any] => IO[A], List[Int]] = Stream(..)
 val threeInts: Stream[IO, Int] = List(1, 2, 3).asStreamEmits[IO]
 // threeInts: Stream[[A >: Nothing <: Any] => IO[A], Int] = Stream(..)
-val caught: Stream[IO, Either[Throwable, Int]] = IO.pure(42).asStreamAttemptEval
+val caught: Stream[IO, Either[Throwable, Int]] = 42.pure[IO].asStreamAttemptEval
 // caught: Stream[[A >: Nothing <: Any] => IO[A], Either[Throwable, Int]] = Stream(..)
-val fromChunk: Stream[IO, Int] = IO.pure(fs2.Chunk(1, 2, 3)).asStreamEvalUnChunk
+val fromChunk: Stream[IO, Int] = fs2.Chunk(1, 2, 3).pure[IO].asStreamEvalUnChunk
 // fromChunk: Stream[[A >: Nothing <: Any] => IO[A], Int] = Stream(..)
-val terminalResult: Pull[IO, Nothing, Int] = IO.pure(42).asPullEval
+val terminalResult: Pull[IO, Nothing, Int] = 42.pure[IO].asPullEval
 // terminalResult: Pull[[A >: Nothing <: Any] => IO[A], Nothing, Int] = Eval(
 //   Pure(42)
 // )
